@@ -53,12 +53,22 @@ module.exports = {
   },
   checkUser(req, res) {
     User.findOne({ email: req.auth_user.email }).select('-password')
-    .then(user => {
-      res.json(user);
-    })
-    .catch(err => {
-      res.status(400).json(err);
-    })
+      .then(user => {
+        res.json(user);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      })
+  },
+  findAll(req, res) {
+    User
+      .find({}).select('-password')
+      .then(user => {
+        res.json(user);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      })
   }
 };
 

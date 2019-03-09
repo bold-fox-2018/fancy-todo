@@ -1,12 +1,15 @@
+const crypto = require('crypto');
 const Project = require('../models/project');
+const User = require('../models/user');
+const Token = require('../models/token');
+const mailer = require('../helpers/mailer');
 
 module.exports = {
   createProject(req, res) {
     let newProject = {
       projectName: req.body.projectName,
       projectLeader: req.auth_user.id,
-      projectMember:
-      {
+      projectMember: {
         members: req.auth_user.id
       }
     }
@@ -92,7 +95,42 @@ module.exports = {
       });
   },
   inviteMember(req, res) {
-
+    User.findById(req.params.userId)
+      .then(user => {
+        let verification = new Token({
+          userId: user._id,
+          token: crypto.randomBytes(15).toString('hex')
+        })
+        verification.save();
+        mailer(verification, user, function (err) {
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            res.json({
+              message: `A verification email has been sent to ${user.email}.`
+            });
+          }
+        });
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      })
+  },
+  verifyInvitation(req, res) {
+    // console.log('=========>');
+    Token
+      .findOne({ token: req.params.token })
+      .then(token => {
+        if (!token) {
+          res.status(400).json({ message: 'Invitation token is invalid' })
+        } else {
+          return Project
+            .findById()
+        }
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      })
   },
   createTask(req, res) {
 
