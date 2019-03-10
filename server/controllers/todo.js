@@ -1,18 +1,10 @@
 const { Todo } = require('../models');
+const mongoose = require('mongoose');
 
 class TodoController {
   static findAll(req, res, next) {
-    let q = {}
-    if(req.query && req.query.q) {
-      let keyword = req.query.q.split('+').join(' ')
-      q = {
-        'tasklist.description': 
-          keyword
-      }
-    }
-
     Todo
-      .find(q)
+      .find()
       .then(function(todos) {
         res.status(200).json(todos)
       })
@@ -33,8 +25,24 @@ class TodoController {
       })
       .catch(next)
   }
+  
 
-  static create({ body }, res, next) {
+  static findOneByUser({ query, userId }, res, next) {
+    let filter = { userId }
+    if(query && query.status) {
+      filter.status = query.status === 'true' ? true : false
+    }
+    
+    Todo
+      .find(filter)
+      .then(function(todos) {
+        res.status(200).json(todos)
+      })
+      .catch(next)
+  }
+
+  static create({ body, userId }, res, next) {
+    body.userId = userId
     Todo
       .create({...body})
       .then(function(todo) {
@@ -53,6 +61,7 @@ class TodoController {
       .findOneAndUpdate({_id: params.id}, {...body}, opts)
       .then(function(todo) {
         if(todo) {
+          console.log(todo)
           res.status(200).json(todo)
         } else {
           res.status(404).json({

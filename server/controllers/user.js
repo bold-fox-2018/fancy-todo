@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 const { googleAuth } = require('../helpers/auth');
+const randomstring = require("randomstring");
 
 module.exports = {
   findAll: function(req, res, next) {
@@ -39,57 +40,60 @@ module.exports = {
     User
       .findOne({
         $or:[
-          {'local.username': body.username },
-          {'local.email': body.username },
+          {'username': body.username },
+          {'email': body.username },
         ] 
       })
       .then(function(user) {
-        console.log(user)
         if(!user) {
           res.status(400).json({
             warning: 'Username/Password is wrong.'
           })
         } else {
-          if(!bcrypt.compareSync(body.password, user.local.password)) {
+          if(!bcrypt.compareSync(body.password, user.password)) {
             res.status(400).json({
               warning: 'Username/Password is wrong.'
             })
           } else {
-            const { email, fullname } = user.local
-            const accessToken = jwt.sign({ email }, JWT_SECRET);
+            const { email, fullname } = user
+            const token = jwt.sign({ 
+              id: _id, email 
+            }, JWT_SECRET);
 
-            res.status(200).json({ email, fullname, accessToken })
+            res.status(200).json({ email, fullname, token })
           }
         }
       })
       .catch(next)
   },
   signInGoogle: function({ body }, res, next) {
-    googleAuth(body.idtoken)
+    let ticket = null
+    googleAuth(body.id_token)
     .then(function(ticket) {
-      const { email, name, picture } = ticket.getPayload();
+      const { name, email, picture } = ticket.getPayload();
       User
         .findOne({ email })
         .then(function(user) {
           if(!user) {
-            return User.create({
-              google: {
-                fullname: name,
-                email: email
-              }
-            })
-          } else {
-            user.google = {
+            let newUser = new User({
               fullname: name,
-              email: email
-            }
-            return user.save()
-          }
-        })
-        .then(function(user) {
-          const accessToken = jwt.sign({ email }, JWT_SECRET);
+              username: name,
+              password: randomstring.generate(8), 
+              email: email,
+              via: 'google'
+            })
+            newUser
+              .save()
+              .then(function(user) {
+                const token = jwt.sign({ id: user._id, email }, JWT_SECRET);
 
-          res.status(200).json({ email, fullname:name, picture, accessToken });
+                res.status(200).json({ email, fullname:name, picture, token });
+              })
+          } else {
+            const token = jwt.sign({ id: user._id, email }, JWT_SECRET);
+  
+            res.status(200).json({ email, fullname:name, picture, token });
+          } 
         })
         .catch(next)
     })

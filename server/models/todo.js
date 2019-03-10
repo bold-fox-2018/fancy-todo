@@ -2,23 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const todoSchema = new Schema({
-  userId: {
-    type: Number,
-    ref: 'User',
-    required: [true, 'User ID must be filled.'],
+  userId: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'User' 
   },
   name: {
     type: String,
     required: [true, 'Todo Name must be filled.'],
     minlength: [3, 'Todo Name length must be higher than 3 character']
   },
-  tasklist: [{
-    description: String,
-    status: {
-      type: Boolean,
-      default: false
-    }
-  }],
+  description: {
+    type: String,
+    required: [true, 'Description must be filled.'],
+    minlength: [3, 'Description length must be higher than 3 character']
+  },
   status: {
     type: Boolean,
     default: false
@@ -35,23 +32,9 @@ const todoSchema = new Schema({
 });
 
 todoSchema.pre('save', function (next) {
+  this.status = false;
   this.create_date = new Date();
   this.update_date = new Date();
-  next();
-});
-
-todoSchema.post('findOneAndUpdate', function(todo, next) {
-  if(todo.tasklist.length > 0) {
-    let complete = true;
-    todo.tasklist.forEach(task => {
-      if(!task.status) {
-        complete = false;
-      }
-    })
-
-    todo.status = complete ? true : false
-    todo.save();
-  }
   next();
 });
 

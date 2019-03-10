@@ -16,6 +16,7 @@ mongoose.connect('mongodb://localhost/fancy_todo', {
 app
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
+  .use(require('cors')())
 
 app
   .use('/todoapi/', routes)

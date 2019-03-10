@@ -1,27 +1,187 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="google-signin-client_id" content="564100602618-pfmes89peavb5h6o0fnvt0oufrucak7o.apps.googleusercontent.com">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
+  <title>Fancy Todo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ 
+  <style>
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+  
+      main {
+        flex: 1 0 auto;
+      }
+      .login-box {
+        height: 100%;
+      }
+      .modal {
+      height: 90%;
+      width: 40%;
+    }
+    .g-signin2 {
+      width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+  <header>
+    <nav class="grey darken-3">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a id="title" href="#" class="brand-logo">Fancy Todo</a>
+          <ul id="option" class="right"></ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Content Here -->
+  <main id="content">
+
+<!-- login form -->
+    <div id="login-form" class="container">
+      <div class="valign-wrapper row login-box">
+
+        <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+          <form id="form-signin" class="col s12">
+            <div class="card-content">
+              <h6 class="center-align">Sign In Into Your Account</h6>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="username" type="text" name="username">
+                  <label for="username">Username/Email</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="password" type="password" name="password">
+                  <label for="password">Password</label>
+                </div>
+                <div class="input-field col s12 center-align">
+                  <button class="btn waves-effect waves-light modal-close" type="submit" name="action">Sign In</button>
+                  <button class="blue btn waves-effect waves-light modal-close">Sign Up</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="col s12">
+            <div class="card-content center-align">
+              <div id="g-signin-button" class="g-signin2" data-longtitle="true" data-onsuccess="signInGoogle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- login form -->
+
+<!-- dashboard -->
+    <div id="dashboard">
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <!-- modal -->
+            <div class="row">
+              <!-- add modal -->
+              <div id="content-dashboard" class="col s12">
+                <div id="warning"><p></p></div>
+                
+                <!-- trigger -->
+                <a class="waves-effect waves-light btn modal-trigger" href="#new-modal">Add Task</a>
+                <a class="green waves-effect waves-light btn" onclick="showAll()">View All</a>
+                <a class="blue waves-effect waves-light btn" onclick="filterFinished()">View Finished</a>
+                <a class="deep-orange waves-effect waves-light btn" onclick="filterOngoing()">View Ongoing</a>
+
+                <!-- new modal -->
+                <div id="new-modal" class="modal">
+                  <form id="todo-add">
+                    <div class="modal-content">
+                      <div class="input-field col s12">
+                        <input id="name" type="text">
+                        <label for="name">Todo</label>
+                      </div>
+                      <div class="input-field col s12">
+                        <input id="description" type="text">
+                        <label for="description">description</label>
+                      </div>
+
+                      <div class="input-field col s12">
+                        <input id="due_date" type="date">
+                        <label for="due_date">Due Date</label>
+                      </div>
+
+                      <button class="btn waves-effect waves-light modal-close" type="submit" name="action">Add
+                        <i class="material-icons right">send</i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- edit modal -->
+                <div id="edit-modal" class="modal">
+                  <form id="todo-edit">
+                    <div class="modal-content">
+                      <div class="input-field col s12">
+                        <input id="edit-name" type="text" placeholder="Todo" >
+                        <label class="active" for="name">Todo</label>
+                      </div>
+                      <div class="input-field col s12">
+                        <input id="edit-description" type="text" placeholder="description" >
+                        <label class="active" for="description">description</label>
+                      </div>
+
+                      <div class="input-field col s12">
+                        <input id="edit-due_date" type="date">
+                        <label class="active" for="due_date">Due Date</label>
+                      </div>
+
+                      <div class="input-field col s12">
+                        <label class="active" for="edit-status">
+                          <input id="edit-status" type="checkbox" class="filled-in">
+                          <span>Done?</span>
+                        </label>
+                      </div>
+                      <br>
+                      <button id="edit-id" class="btn waves-effect waves-light modal-close" type="submit" name="action">Edit
+                        <i class="material-icons right">send</i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- list todo -->
+            <div class="row" id="list-todo"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- dashboard -->
+  </main>
+
+  <footer class="page-footer white">
+    <div class="footer-copyright grey darken-3">
+      <div class="container">
+        © 2019 Copyright
+        <a class="grey-text text-lighten-4 right" href="#!">Additional Info</a>
+      </div>
+    </div>
+  </footer>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="./js/content.js"></script>
   <script src="./js/main.js"></script>
-</head>
-<body>
-
-  <form>
-    <input type="text" name="username" id="username" placeholder="username">
-    <input type="password" name="password" id="password" placeholder="password">
-    <button onclick="signin()">Sign In</button>
-  </form>
-  
-
-
+  <script src="./js/google-auth.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
+
 </html>
