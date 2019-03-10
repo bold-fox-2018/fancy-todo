@@ -2,8 +2,17 @@ const { Todo } = require('../models');
 
 class TodoController {
   static findAll(req, res, next) {
+    let q = {}
+    if(req.query && req.query.q) {
+      let keyword = req.query.q.split('+').join(' ')
+      q = {
+        'tasklist.description': 
+          keyword
+      }
+    }
+
     Todo
-      .find()
+      .find(q)
       .then(function(todos) {
         res.status(200).json(todos)
       })
