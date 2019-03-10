@@ -57,7 +57,7 @@ module.exports = {
           } else {
             const { email, fullname } = user
             const token = jwt.sign({ 
-              id: _id, email 
+              id: _id, email, fullname
             }, JWT_SECRET);
 
             res.status(200).json({ email, fullname, token })
@@ -85,7 +85,7 @@ module.exports = {
             newUser
               .save()
               .then(function(user) {
-                const token = jwt.sign({ id: user._id, email }, JWT_SECRET);
+                const token = jwt.sign({ id: user._id, email, fullname:name }, JWT_SECRET);
 
                 res.status(200).json({ email, fullname:name, picture, token });
               })

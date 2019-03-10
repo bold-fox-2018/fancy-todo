@@ -24,6 +24,7 @@
     "google-auth-library": "^3.1.0",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.18",
+    "nodemailer": "^5.1.1",
     "randomstring": "^1.1.5"
   },
   "devDependencies": {

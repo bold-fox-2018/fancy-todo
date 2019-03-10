@@ -27,8 +27,8 @@ class TodoController {
   }
   
 
-  static findOneByUser({ query, userId }, res, next) {
-    let filter = { userId }
+  static findOneByUser({ query, decoded }, res, next) {
+    let filter = { userId:decoded._id }
     if(query && query.status) {
       filter.status = query.status === 'true' ? true : false
     }
@@ -46,6 +46,7 @@ class TodoController {
     Todo
       .create({...body})
       .then(function(todo) {
+        sendEmail(req.decoded.email, req.decoded.fullname, todo.name, todo.description, todo.due_date);
         res.status(201).json(todo)
       })
       .catch(next)
