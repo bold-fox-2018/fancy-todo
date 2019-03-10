@@ -1,5 +1,5 @@
 const { Todo } = require('../models');
-const mongoose = require('mongoose');
+const sendEmail = require('../helpers/sendEmail')
 
 class TodoController {
   static findAll(req, res, next) {
@@ -41,12 +41,13 @@ class TodoController {
       .catch(next)
   }
 
-  static create({ body, userId }, res, next) {
-    body.userId = userId
+  static create({ body, decoded }, res, next) {
+    body.userId = decoded._id
     Todo
       .create({...body})
       .then(function(todo) {
-        sendEmail(req.decoded.email, req.decoded.fullname, todo.name, todo.description, todo.due_date);
+        console.log(decoded.email, decoded.fullname)
+        sendEmail(decoded.email, decoded.fullname, todo.name, todo.description, todo.due_date);
         res.status(201).json(todo)
       })
       .catch(next)

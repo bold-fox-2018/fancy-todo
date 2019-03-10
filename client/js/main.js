@@ -115,7 +115,8 @@ function newTodo(self) {
     $('#todo-edit').each(function(){
       this.reset();
     });
-  
+    M.toast({html: 'New task has been created.'})
+    M.toast({html: 'We also send you an email as remainder.'})
   })
   .fail(function(err) {
     let html = ''
@@ -168,6 +169,7 @@ function editTodo(self) {
     } else {
       filterOngoing()
     }
+    M.toast({html: 'One task has just ben updated.'})
   })
 }
 
@@ -201,6 +203,7 @@ function finishTodo(self) {
     } else {
       filterOngoing()
     }
+    M.toast({html: 'Congratulation, you just finish one task.'})
   })
 }
 
@@ -220,6 +223,7 @@ function unfinishTodo(self) {
     } else {
       filterOngoing()
     }
+    M.toast({html: 'You redo your finished task.'})
   })
 }
 
@@ -233,6 +237,7 @@ function deleteTodo(self) {
   })
   .done(function() {
     showAll()
+    M.toast({html: 'One task has been deleted'})
   })
 }
 

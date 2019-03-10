@@ -2,6 +2,7 @@ function signInGoogle(googleUser) {
   const id_token = googleUser.getAuthResponse().id_token;
   
   $.post(`${baseUrl}/signin/google`, { id_token }, function(data, status) {
+    console.log(data.token)
     localStorage.setItem('token', data.token)
     localStorage.setItem('fullname', data.fullname)
     // $('#content').html(`<p>dashboard</p>`)

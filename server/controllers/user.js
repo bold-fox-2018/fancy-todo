@@ -90,7 +90,7 @@ module.exports = {
                 res.status(200).json({ email, fullname:name, picture, token });
               })
           } else {
-            const token = jwt.sign({ id: user._id, email }, JWT_SECRET);
+            const token = jwt.sign({ id: user._id, email, fullname:name}, JWT_SECRET);
   
             res.status(200).json({ email, fullname:name, picture, token });
           } 

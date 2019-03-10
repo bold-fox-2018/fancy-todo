@@ -1,25 +1,21 @@
 'use strict';
 const nodemailer = require('nodemailer');
 
-
 const transporter = nodemailer.createTransport({
   service: 'gmail',
-  sercure: false,
-  port: 25,
   auth: {
     type: 'OAuth2',
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    user: process.env.GOOGLEUSER,
+    clientId: process.env.GOOGLECLIENTID,
+    clientSecret: process.env.GOOGLESECRET,
+    refreshToken: process.env.GOOGLEREFRESH_TOKEN
   },
-  tls: {
-    rejectUnauthorized: false
-  }
 });
 
 function sendEmail(email, name, taskName, desc, dueDate) {
   // setup email data with unicode symbols
   let mailOptions = {
-      from: `"Todo Fancy!" <${process.env.EMAIL_USER}>`, // sender address
+      from: `"Todo Fancy!" <${process.env.GOOGLEUSER}>`, // sender address
       to: email, // list of receivers
       subject: `${name}, You've Just Added a Task!`,
       text: `Hi ${name}! You've just added a task with these details:
