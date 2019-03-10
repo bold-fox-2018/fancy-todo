@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fancy Todo</title>
+    <meta name="google-signin-client_id" content="873126432183-ph17juvjronq57qoo1po9h3r6gvt2v6b.apps.googleusercontent.com">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./scripts/main.js"></script>
+</head>
+<body>
+    <div id="profile">
+        <nav>
+            <a href="#" onclick="mainMenu()">Front</a>
+        </nav>
+        <div id="profile-container">
+                <p></p>
+            <div id="login">
+                <div id="g-signin-button" class="g-signin2" data-onsuccess="googleSignIn"></div>
+                <div id="normal-signin">
+                    <label class="email">Email:</label>
+                    <input id="email" type="text"><br>
+                    <label class="password">Password:</label>
+                    <input id="password" type="password"><br>
+                    <input id="registerBtn" type="submit" onclick="register()" value="Register">
+                    <input id="submitBtn" type="submit" onclick="signIn()" value="Sign In">
+                </div>
+                
+            </div>
+            <div id="user-info">
+                
+            </div>
+            <a href="#" onclick="signOut()" id="signout-button">Sign out</a>
+        </div>
+    </div>
+    <div id="todo">
+        <div id="register">
+            <p></p>
+            <br>
+            <label>Name:</label>
+            <input type="text"><br>    
+            <label>Email:</label>
+            <input type="text"><br>
+            <label>Password:</label>
+            <input type="password"><br><br>
+            <input id="submitBtn" type="submit" onclick="signUp()">
+        </div>
+        <div id="todoList">
+            <h1>Todo List</h1>
+            <input type="submit" onclick="showInputTodo()" value="New Todo"><br><br>
+            <table border="1" cellpadding="5" align="center">
+                
+            </table>
+        </div>
+        <div id="newTodo">
+            <h2></h2>
+            <label>Name:</label>
+            <input class="newTodo" type="text"><br>
+            <label>Description:</label>
+            <input class="newTodo" type="text"><br>
+            <label>Status:</label>
+            <input class="newTodo" type="text"><br>
+            <label>Due date:</label>
+            <input class="newTodo" type="datetime-local"><br><br>
+            <div id="submitType">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
