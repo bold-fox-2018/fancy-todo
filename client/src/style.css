@@ -1,0 +1,30 @@
+/* #generalHomepage {
+    background: #0F2027;
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+
+} */
+body {
+    overscroll-behavior: none;
+}
+.buttonNav {
+    color: #fff;
+}
+.formControl {
+    border-radius: 33.3px;
+}
+.btn-primary {
+    background-color: rgb(161, 234, 197);
+    border-color: rgb(161, 234, 197);
+    color: #000;
+}
+#homepageHeader {
+    background-image: url('https://images.pexels.com/photos/533189/pexels-photo-533189.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')
+}
+#logoTheNextGeneration {
+    font-family: 'Srisakdi', cursive;
+    font-size: 2em;
+}
+.sideBarMenu {
+    font-size: 2em;
+    font-family: 'Indie Flower', cursive;
+}
