@@ -1,0 +1,22 @@
+.nav-pills  .nav-link:not(.active) {
+    background-color: white;
+    color: black;
+  }
+  
+  .nav .nav-link {
+    background-color: white;
+    color: black;
+  }
+  
+  .nav-pills .nav-link.active {
+    background-color: #CCE6F4;
+    color: black
+  }
+  
+  #personal-sidebar .nav-link.active {
+    background-color: rgb(245, 245, 245);
+  }
+  
+  #projects-sidebar .nav-link.active {
+    background-color: rgb(245, 245, 245);
+  }

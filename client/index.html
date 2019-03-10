@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="google-signin-client_id"
+    content="500269645153-8vp79r9bplumsaga4h7u1kda634l9kim.apps.googleusercontent.com">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <title>Todo-or-not-Todo</title>
+</head>
+
+<body>
+
+  <!-- registration form -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create an account</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="registrationForm">
+            <h6 id="registrationError"></h6>
+            <div class="form-group">
+              <label for="email1" class="col-form-label">email</label>
+              <input type="text" class="form-control" id="email1" placeholder="e.g. johnDoe1@gmail.com">
+            </div>
+            <div class="form-group">
+              <label for="password1" class="col-form-label">password</label>
+              <input type="password" class="form-control" id="password1"
+                placeholder="enter your password here">
+            </div>
+            <div class="form-group">
+              <label for="fullname" class="col-form-label">full name</label>
+              <input type="text" class="form-control" id="fullName"
+                placeholder="enter your fullname here">
+            </div>
+            <div class="form-group">
+              <label for="role" class="col-form-label">role</label>
+              <input type="text" class="form-control" id="role"
+                placeholder="enter your role here">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit button" class="btn btn-primary">Create Account</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- login form -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel2">Sign in</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm">
+            <h6 id="loginError"></h6>
+            <div class="form-group">
+              <label for="email2" class="col-form-label">email</label>
+              <input type="text" class="form-control" id="email2">
+            </div>
+            <div class="form-group">
+              <label for="password2" class="col-form-label">password</label>
+              <input type="password" class="form-control" id="password2">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit button" class="btn btn-primary">Sign In</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Personal Task form -->
+  <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel3">Create Personal Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="AddTaskForm">
+            <h6 id="AddTaskError"></h6>
+            <div class="form-group input-group">
+              <label for="task-name" class="col-form-label">Task Name <i class="fas fa-file-signature"></i></label>
+              <input type="text" class="form-control rounded ml-2" id="task-name">
+            </div>
+            <!-- add task date-picker -->
+            <div class="form-group input-group date" data-provide="datepicker"><br>
+              <label for="due-date" class="col-form-label">
+                <div class="input-group-addon">
+                  Due Date <i class="far fa-calendar-alt"></i>
+                </div>
+              </label>
+              <input type="text" class="form-control rounded ml-4" id="due-date">
+
+            </div>
+            <hr>
+
+            <div class="form-group">
+              <label for="description" class="col-form-label">Details</label>
+              <textarea type="password" class="form-control" id="description"></textarea>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit button" class="btn btn-primary">Create Task</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Project Task form -->
+  <div class="modal fade" id="exampleModal3a" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3a"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel3a">Create Project Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="AddProjectTaskForm">
+            <h6 id="AddProjectTaskError"></h6>
+            <div class="form-group input-group">
+              <label for="task-name" class="col-form-label">Task Name <i class="fas fa-file-signature"></i></label>
+              <input type="text" class="form-control rounded ml-2" id="project-task-name">
+            </div>
+            <!-- add task date-picker -->
+            <div class="form-group input-group date" data-provide="datepicker"><br>
+              <label for="due-date" class="col-form-label">
+                <div class="input-group-addon">
+                  Due Date <i class="far fa-calendar-alt"></i>
+                </div>
+              </label>
+              <input type="text" class="form-control rounded ml-4" id="project-due-date">
+            </div>
+            <hr>
+
+            <div class="form-group">
+              <label for="description" class="col-form-label">Details</label>
+              <textarea type="password" class="form-control" id="project-description"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="project" class="col-form-label">Project</label>
+              <select id="project-selection" class="custom-select custom-select-sm">
+              </select>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit button" class="btn btn-primary">Create Task</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Task Form -->
+  <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel4">Task Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="EditTaskForm">
+            <h6 id="EditTaskError"></h6>
+            <div class="form-group input-group">
+              <label for="task-name2" class="col-form-label">Task Name <i class="fas fa-file-signature"></i></label>
+              <input type="text" class="form-control rounded ml-2" id="task-name2">
+            </div>
+            <!-- add task date-picker -->
+            <div class="form-group input-group date" data-provide="datepicker"><br>
+              <label for="due-date2" class="col-form-label">
+                <div class="input-group-addon">
+                  Due Date <i class="far fa-calendar-alt"></i>
+                </div>
+              </label>
+              <input type="text" class="form-control rounded ml-4" id="due-date2">
+
+            </div>
+            <hr>
+
+
+            <div class="form-group">
+              <label for="description2" class="col-form-label">Details</label>
+              <textarea type="password" class="form-control" id="description2"></textarea>
+            </div>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit button" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Project Form -->
+  <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel4">Create A Project</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="AddProjectForm">
+            <h6 id="AddProjectError"></h6>
+            <div class="form-group input-group">
+              <label for="project-name" class="col-form-label">Project Name <i
+                  class="fas fa-file-signature"></i></label>
+              <input type="text" class="form-control rounded ml-2" id="project-name">
+            </div>
+            <!-- add task date-picker -->
+            <div class="form-group input-group date" data-provide="datepicker"><br>
+              <label for="due-date3" class="col-form-label">
+                <div class="input-group-addon">
+                  Due Date <i class="far fa-calendar-alt"></i>
+                </div>
+              </label>
+              <input type="text" class="form-control rounded ml-4" id="due-date3">
+
+            </div>
+            <hr>
+
+
+            <div class="form-group">
+              <label for="description3" class="col-form-label">Details</label>
+              <textarea type="password" class="form-control" id="description3"></textarea>
+            </div>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit button" class="btn btn-primary">Create Project</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Member Form -->
+  <div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel4"> Add new Member</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="AddNewMember">
+            <fieldset disabled>
+            <h6 id="AddNewMemberError"></h6>
+            <div class="form-group input-group">
+              <label for="project-name" class="col-form-label">Project Name <i
+                  class="fas fa-file-signature"></i></label>
+              <input type="text" class="form-control rounded ml-2" id="project-name6">
+            </div>
+            <!-- add task date-picker -->
+            <div class="form-group input-group date" data-provide="datepicker"><br>
+              <label for="due-date3" class="col-form-label">
+                <div class="input-group-addon">
+                  Due Date <i class="far fa-calendar-alt"></i>
+                </div>
+              </label>
+              <input type="text" class="form-control rounded ml-4" id="due-date6">
+            </div>
+          </fieldset>
+            <hr>
+            <div class="form-group">
+                <label for="project" class="col-form-label">New Member</label>
+              <select id="all-member-in-db" class="custom-select custom-select-sm">
+              </select>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit button" class="btn btn-primary"> Add member</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- auth -->
+  <div id="auth" class="container-fluid bg-primary vh-100 ">
+    <div class="d-flex justify-content-center">
+      <div class="d-flex flex-column vh-100 justify-content-center">
+        <h1 style="color:white;" class="d-flex align-self-center"><i class="fas fa-clipboard-check "></i> Todo or not Todo</h1>
+        <h6 style="color:white;" class="d-flex align-self-center">To-do-list web-app built with mongoose & express</h6>
+        <br>
+        <button type="button" class="btn" style="background-color: rgb(252, 99, 79); color:white;" data-toggle="modal"
+          data-target="#exampleModal">Create an
+          account</button>
+        <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#exampleModal2">Sign
+          In</button>
+        <h6 style="color:white;" class="d-flex align-self-center mt-3 mb-3">or</h6>
+        <div class="g-signin2" data-onsuccess="onSignIn" data-width="400" data-longtitle="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- navbar -->
+  <nav style="background-color:#4BA3C3;" class="navbar navbar-dark text-white shadow rounded-bottom" id="navbar">
+    <!-- navbar brand -->
+
+    <a href="#" class="navbar-brand" onclick="getHome()"> <i class="fas fa-clipboard-check "></i> Todo or Not Todo</a>
+
+    <!-- navbar add personal todo -->
+    <button type="button" id="add-personaltodo" class="btn rounded" style="background-color:rgb(13, 61, 94); color:white;" data-toggle="modal"
+      data-target="#exampleModal3"> + New Personal
+      Task</button>
+
+      <!-- navbar add project todo -->
+    <button type="button" id="add-projecttodo" class="btn rounded" style="background-color:rgb(13, 61, 94); color:white;" data-toggle="modal"
+    data-target="#exampleModal3a"> + New Project
+    Task</button>
+
+    <!-- navbar search bar -->
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Quick Search..." aria-label="Search">
+      <button class="btn my-2 my-sm-0" type="submit"
+        style="background-color:rgb(13, 61, 94); color:white">Search</button>
+    </form>
+
+    <!-- navbar user dropdown -->
+    <div class="btn-group">
+      <button type="button" class="btn dropdown-toggle" style="background-color: #CCE6F4;" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-user"></i>
+      </button>
+
+      <div class="dropdown-menu dropdown-menu-right">
+        <button class="dropdown-item" type="button">Update profile</button>
+        <hr>
+        <button class="dropdown-item" type="button" onclick="signOut()">Log out</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- home container-->
+  <div class="container-fluid vh-100" id="home">
+    <div class="row vh-100">
+
+      <!-- sidebar -->
+      <div class="col-sm-3 bg-white overflow-auto">
+        <div class="nav flex-column nav-pills mt-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <!-- <a class="nav-link active" data-toggle="pill" href="#" onclick="getSideBar('All Task')">All Task</a> -->
+          <a class="nav-link " data-toggle="pill" href="#" onclick="getSideBar('Personal')">Personal</a>
+          <a class="nav-link" data-toggle="pill" onclick="getSideBar('projects')" href="#">Projects</a>
+        </div>
+        <hr>
+
+        <!-- personal sidebar -->
+        <div id="personal-sidebar">
+          <nav class="nav flex-column nav-pills" role="tablist">
+            <a class="nav-link active" data-toggle="pill" href="#" onclick="getTag('All Task')"><i
+                class="fas fa-list-ul" style="color: green;"></i> All Task</a>
+            <a class="nav-link" data-toggle="pill" href="#"><i class="fas fa-calendar-day"
+                style="color: rgb(206, 77, 60);"></i>
+              Today</a>
+            <a class="nav-link" data-toggle="pill" href="#"><i class="far fa-star" style="color: rgb(250, 214, 54)"></i>
+              Starred</a>
+            <div>
+              <hr>
+            </div>
+            <a class="nav-link " href="#">+Add Category</a>
+            <a class="nav-link" data-toggle="pill" href="#"><i class="fas fa-shopping-cart"
+                style="color: rgb(250, 214, 54);"></i>
+              Shopping
+              List</a>
+            <a class="nav-link" data-toggle="pill" href="#"><i class="fas fa-running"
+                style="color: rgb(54, 188, 250);"></i> Personal
+              Errands</a>
+            <a class="nav-link" data-toggle="pill" href="#"> <i class="fas fa-home"
+                style="color: rgb(53, 187, 135);"></i> Houseworks</a>
+          </nav>
+        </div>
+
+        <!-- projects sidebar -->
+        <div id="projects-sidebar">
+          <nav class="nav flex-column nav-pills" role="tablist" id="nav-projects">
+
+          </nav>
+        </div>
+
+      </div>
+
+      <!-- main content -->
+      <div class="col-sm bg-light overflow-auto rounded-bottom main-content">
+        <br>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script src="
+    https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="js/main.js"></script>
+  <script src="js/todo.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/project.js"></script>
+</body>
+
+</html>
