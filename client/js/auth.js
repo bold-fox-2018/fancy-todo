@@ -36,9 +36,9 @@ $('#registrationForm').submit((event) => {
   $.post(`${serverUrl}/users/register`, body)
     .done(Response => {
       console.log(Response)
-      localStorage.setItem('token', Response.token)
+      // localStorage.setItem('token', Response.token)
       $('#exampleModal').modal('toggle')
-      getHome()
+      getAuth()
     })
     .fail(err => {
       if (err.responseJSON.err.name == "ValidationError") {

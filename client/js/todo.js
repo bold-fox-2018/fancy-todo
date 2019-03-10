@@ -51,7 +51,6 @@ function getTag(tagName) {
       console.log(err)
     })
 
-
 }
 
 function deleteTask(taskId, tagName) {
@@ -63,11 +62,8 @@ function deleteTask(taskId, tagName) {
     method: "DELETE"
   })
     .done(() => {
-      getTag(tagName)
-      // $.when($('#listDone').fadeOut(400))
-      // .done(() => {
-      //   getTag(tagName)
-      // })
+      // getTag(tagName)
+      getSideBar('project')
     })
     .fail(err => {
       console.log(err)
@@ -94,6 +90,7 @@ $('#AddTaskForm').submit((event) => {
   })
     .done(() => {
       $('#exampleModal3').modal('toggle')
+      $('#exampleModal3').find("input[type=text], textarea").val('')
       getHome()
     })
     .fail(err => {

@@ -54,7 +54,7 @@ module.exports = {
         Todo
             .find(query).populate('users').populate('project')
             .then(todos => {
-                if(!todos) res.status(404).json({message : 'not found'})
+                if (!todos) res.status(404).json({ message: 'not found' })
                 else {
                     res.status(200).json(todos)
                 }
@@ -63,58 +63,86 @@ module.exports = {
                 res.status(500).json({ message: `internal server error`, err })
             })
     },
-    findOne : (req,res) => {
+    findOne: (req, res) => {
         Todo
             .findById(req.params.id)
             .then(todo => {
-                if(!todo) res.status(404).json({message :'todos not found'})
+                if (!todo) res.status(404).json({ message: 'todos not found' })
                 else {
                     res.status(200).json(todo)
                 }
             })
             .catch(err => {
-                res.status(500).json({message:'internal server error', err})
+                res.status(500).json({ message: 'internal server error', err })
             })
     },
-    update : (req,res) => {
+    update: (req, res) => {
         Todo
-            .findOneAndUpdate({ _id :req.params.id }, {$set : req.body}, {new : true})
+            .findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true })
             .then(todo => {
-                if(!todo) res.status(404).json({message :'todos not found'})
+                if (!todo) res.status(404).json({ message: 'todos not found' })
                 else {
                     res.status(200).json(todo)
                 }
             })
             .catch(err => {
-                res.status(500).json({message:'internal server error', err})
+                res.status(500).json({ message: 'internal server error', err })
             })
     },
-    delete : (req,res) => {
+    delete: (req, res) => {
         Todo
-            .findOneAndDelete({_id : req.params.id})
+            .findOne({ _id: req.params.id })
             .then(todo => {
-                if(!todo) res.status(404).json({message : 'todos not found'})
+                if (!todo) res.status(404).json({ message: 'todos not found' })
                 else {
-                    if(todo.project){
+                    if (todo.project) {
                         return Project
-                            .findById(todo.project)
+                            .findOneAndUpdate({ _id: todo.project }, {
+                                $pull: {
+                                    todos: todo._id
+                                }
+                            }, { new: true })
                             .then(project => {
-                                project.todos = project.todos.filter(todoElement => {
-                                    todoElement === todo._id
-                                })
-                                return project.save()
+                                res.status(200).json({ todo, project })
                             })
-                            .then(savedProject => {
-                                res.status(200).json({todo , savedProject})
+                    } else {
+                        return Todo
+                            .deleteOne({ _id: todo._id })
+                            .then(todo => {
+                                res.status(200).json(todo)
                             })
-                    }
-                    else {
-                        res.status(200).json(todo)
                     }
                 }
             })
             .catch(err => {
-                res.status(500).json({message:'internal server error', err})
+                res.status(500).json({ message: 'internal server error', err })
             })
+
+        // Todo
+        //     .findOneAndDelete({_id : req.params.id})
+        //     .then(todo => {
+        //         if(!todo) res.status(404).json({message : 'todos not found'})
+        //         else {
+        //             if(todo.project){
+        //                 return Project
+        //                     .findById(todo.project)
+        //                     .then(project => {
+        //                         project.todos = project.todos.filter(todoElement => {
+        //                             todoElement !== todo._id
+        //                         })
+        //                         return project.save()
+        //                     })
+        //                     .then(savedProject => {
+        //                         res.status(200).json({todo , savedProject})
+        //                     })
+        //             }
+        //             else {
+
+        //             }
+        //         }
+        //     })
+        //     .catch(err => {
+        //         res.status(500).json({message:'internal server error', err})
+        //     })
     }
 }

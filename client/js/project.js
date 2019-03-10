@@ -54,7 +54,8 @@ $('#AddProjectTaskForm').submit((event) => {
   })
     .done(() => {
       $('#exampleModal3a').modal('toggle')
-      getHome()
+      $('#exampleModal3a').find("input[type=text], textarea").val('')
+      getSideBar('project')
     })
     .fail(err => {
       console.log(err.responseJSON.msg)
@@ -73,22 +74,14 @@ function getProjectList() {
   })
     .done(Response => {
       $('#nav-projects').append(`
-          <a class="nav-link active" data-toggle="pill" onclick="getAllProjectTodo('All Task')" href="#"><i
+          <a class="nav-link " data-toggle="pill" onclick="getAllProjectTodo('All Task')" href="#"><i
           class="fas fa-list-ul" style="color: green;"></i> All Task</a>
-          <a class="nav-link" data-toggle="pill" href="#"><i class="fas fa-calendar-day"
-              style="color: rgb(206, 77, 60);"></i>
-            Today</a>
-          <a class="nav-link" data-toggle="pill" href="#"><i class="far fa-star"
-              style="color: rgb(250, 214, 54);"></i> Starred</a>
-          <div>
-            <hr>
-          </div>
+            <div><hr></div>
           <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal5">+Add Projects</a>
         `)
       let index = 0
+      $('#project-selection').empty()
       Response.forEach(project => {
-        console.log(project)
-
         $('#nav-projects').append(`
             <a class="nav-link" data-toggle="pill" href="#" onclick="getAllProjectTodo('${project.name}')"><i class="fas fa-project-diagram"
               style="color: rgb(252, 99, 79);"></i> ${project.name}</a>
@@ -100,6 +93,7 @@ function getProjectList() {
               
             </div>
          `)
+         
         $('#project-selection').append(`
             <option value="${project._id}">${project.name}</option>
          `)
