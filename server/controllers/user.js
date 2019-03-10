@@ -29,7 +29,7 @@ module.exports = {
   },
   register: function({ body }, res, next) {
     User
-      .create({local: {...body}})
+      .create({...body})
       .then(function(user) {
         res.status(201).json(user);
       })
@@ -38,25 +38,27 @@ module.exports = {
   signInLocal: function({ body }, res, next) {
     User
       .findOne({
-        $or: [
-          { username: body.username },
-          { email: body.username }
-        ]
+        $or:[
+          {'local.username': body.username },
+          {'local.email': body.username },
+        ] 
       })
       .then(function(user) {
+        console.log(user)
         if(!user) {
           res.status(400).json({
             warning: 'Username/Password is wrong.'
           })
         } else {
-          if(!bcrypt.compareSync(body.password, user.password)) {
+          if(!bcrypt.compareSync(body.password, user.local.password)) {
             res.status(400).json({
               warning: 'Username/Password is wrong.'
             })
           } else {
+            const { email, fullname } = user.local
             const accessToken = jwt.sign({ email }, JWT_SECRET);
 
-            res.status(200).json({ email, name, accessToken })
+            res.status(200).json({ email, fullname, accessToken })
           }
         }
       })
@@ -87,7 +89,7 @@ module.exports = {
         .then(function(user) {
           const accessToken = jwt.sign({ email }, JWT_SECRET);
 
-          res.status(200).json({ email, name, picture, accessToken });
+          res.status(200).json({ email, fullname:name, picture, accessToken });
         })
         .catch(next)
     })

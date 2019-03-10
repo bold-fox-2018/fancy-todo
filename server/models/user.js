@@ -38,9 +38,11 @@ const userSchema = new Schema({
 })
 
 userSchema.pre('save', function(next){
-  var salt = bcrypt.genSaltSync(10)
-  var hash = bcrypt.hashSync(this.password, salt)
-  this.password = hash
+  if(this.local.password) {
+    var salt = bcrypt.genSaltSync(10)
+    var hash = bcrypt.hashSync(this.local.password, salt)
+    this.local.password = hash
+  }
   next()
 })
 
