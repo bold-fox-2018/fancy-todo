@@ -1,0 +1,82 @@
+body {
+    background-color: #321e25;
+    font-family: 'Lato', sans-serif;
+}
+
+#main {
+    color: orange;
+}
+
+#user-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.greeting-message {
+    text-align: center;
+}
+
+.brand-logo {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.sign-in {
+    background-color: #ffda20;
+    border-radius: 10px;
+}
+
+.sign-up {
+    background-color: #ffda20;
+    border-radius: 10px;
+}
+
+.btn-flat {
+    color: black;
+    font-size: 18px;
+}
+
+.nav-wrapper {
+    background-color: #000;
+}
+
+.g-signin2 {
+    padding: 13px 30px;
+}
+
+.right {
+    padding-right: 30px;
+}
+
+.red {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.button-logout {
+    margin-left: 40px;
+}
+
+.todo-form {
+    border-radius: 10px;
+    background-color: #f7f5df;
+}
+
+.todo-header {
+    background-color:#ffda20;
+    color: black;
+}
+
+.todo-list {
+    text-align: center;
+}
+
+.add-todo {
+    color: black;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #ffda20;
+    width: 25%;
+    padding: 2px;
+    border-radius: 20px;
+}

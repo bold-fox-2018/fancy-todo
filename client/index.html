@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="refresh" URL=http://localhost:8080">
+    <meta name="google-signin-client_id"
+        content="611527288078-fe5auh3rmruqkhnobq3giqla1mde5p39.apps.googleusercontent.com">
+    <title>Fancy Todo</title>
+    <!-- script -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- script -->
+
+    <!-- css -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Orbitron:700" rel="stylesheet"> 
+    <!-- css -->
+
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Fancy Todo</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li class="login-google">
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                </li>
+                <li class="button-login-logout"></li>
+            </ul>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li id='user-name'></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- navbar -->
+
+    <!-- main -->
+    <div id='main'></div>
+    <!-- main -->
+</body>
+
+</html>
