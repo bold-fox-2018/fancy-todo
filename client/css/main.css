@@ -1,0 +1,159 @@
+@import url(https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css);
+@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+#navigation {
+    float: left;
+}
+
+body {
+    background: #1abc9c;
+}
+
+#content {
+    background: #1abc9c;
+    float: left;
+    margin-left: 60px;
+    padding: 30px;
+    height: 100%;
+}
+
+/*                */
+
+/*   GOOGLE BTN   */
+
+/*                */
+
+.g-signin2 {
+    width: 100%;
+}
+
+.g-signin2>div {
+    margin: 0 auto;
+}
+
+#formLogin {
+    text-align: center;
+}
+
+/*                      */
+
+/*  F O R M  L O G I N  */
+
+/*                      */
+
+#labelFormLogin {
+    font-family: 'Righteous', cursive;
+    font-size: 30px;
+}
+
+.title {
+    text-align: center;
+    font-size: 16px;
+}
+
+.line {
+    display: inline-block;
+    width: 25%;
+    height: 2px;
+    background-color: #000;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #000;
+    border-radius: 50%;
+    margin: 0 10px;
+    align-items: center;
+}
+
+/*                          */
+
+/*      T O D O  L I S T    */
+
+/*                          */
+
+.todo {
+    /* color: white; */
+    border-radius: 10px;
+    margin: 10px;
+    background-color: white;
+    min-width: 70px;
+    max-width: 295px;
+    padding: 3px 5px;
+    float: left;
+}
+
+.todo>.title {
+    display: block;
+    font-family: 'Righteous', cursive;
+    text-align: center;
+    border-bottom: solid #e66767 1px;
+}
+
+.todo>.description {
+    padding: 5px 5px;
+}
+
+.todo>.footer {
+    padding-top: 5px;
+    text-align: left;
+}
+
+.fa-thumb-tack {
+    float: right;
+    padding: 0px 3px;
+    color: #16a085;
+}
+
+.fa-pencil-square {
+    padding: 0px 3px;
+    color: #27ae60;
+}
+
+.fa-trash {
+    padding: 0px 3px;
+    color: #2980b9;
+}
+
+.action {
+    padding-left: 10px;
+    font-size: 23px;
+    display: inline;
+    /* background-color: green; */
+}
+
+.due_date {
+    float: right;
+}
+
+.unpinned {
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+/*                              */
+
+/*      T O D O  C R E A T E    */
+
+/*                              */
+
+textarea {
+    resize: vertical;
+}
+
+label {
+    display: inline;
+}
+
+.formUpdate {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.bold{
+    font-weight: bold;
+}
