@@ -83,7 +83,7 @@ class UserController {
                         token: jwt.sign({
                             id: data.id,
                             email: data.email
-                        }, process.env.JWTSECRET), data: data
+                        }, process.env.SECRET), data: data
                     })
                 } else {
                     return User.create(
@@ -101,7 +101,7 @@ class UserController {
                             token: jwt.sign({
                                 id: logged.id,
                                 email: logged.email
-                            }, process.env.JWTSECRET), data: data
+                            }, process.env.SECRET), data: data
                         })
                     })
                 }
