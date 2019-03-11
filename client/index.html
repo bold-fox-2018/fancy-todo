@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="814862605754-v166o3knspsn2m07tll28ah5ckh9prpp.apps.googleusercontent.com">
+    <title>TODO </title>
+
+
+
+</head>
+
+<body>
+    <form id="login" onsubmit="login()">
+        <h1>login yuk</h1>
+        Email:<br>
+        <input type="text" name="email" id="emailLogin">
+        <br>
+        Password:<br>
+        <input type="password" name="password" id="passwordLogin">
+        <br><br>
+        <input type="submit" value="Submit" id="submit_button">
+        <br>
+
+        <div class="g-signin2" data-onsuccess="onSignIn" id="google_signin"></div>
+
+    </form>
+
+
+    <form id="register_form" onsubmit="register()">
+        <div class="container">
+            <h1>Register</h1>
+            <hr>
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" id="emailReg" required>
+            <br>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="passwordReg" required>
+            <br>
+
+
+            <input type="submit" value="Submit" id="submit_button"></input>
+        </div>
+
+        <div class="container signin">
+            <br>
+
+            <p>Already have an Google account? <div class="g-signin2" data-onsuccess="onSignIn" id="google_signin"></div>
+            </p>
+        </div>
+    </form>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+    <button href="#" onclick="signOut()" id="buton3">signOut</button>
+
+    <hr>
+    <button href='#' onclick="todo()" id="buton1"> show your todo</button><br>
+    <button href='#' onclick="save()" id="buton2"> save</button><br>
+    <table id="allTodo" border="2">
+        <!-- <script language="javascript">
+            var tbl = document.getElementById("allTodo");            
+                if (tbl != null) {            
+                    for (var i = 0; i < tbl.rows.length; i++) {
+                        tbl.rows[i].cells[5].onclick = save(this);                                            
+                  }                         
+                             
+                    
+        </script> -->
+    </table>
+
+
+
+    <form id="addlist">
+
+        <label for="name"><b>name</b></label>
+        <input type="text" placeholder="Enter name" name="name" id="todoName">
+        <br>
+
+        <label for="description"><b>name</b></label>
+        <input type="text" placeholder="Enter description" name="description" id="todoDescription">
+        <br>
+
+        <label for="due_date"><b>due date</b></label>
+        <input type="date" placeholder="Enter due date" name="due_date" id="todoDue_date">
+        <br>
+
+        <label for="status"><b>status</b></label>
+        <input type="text" placeholder="Enter satatus" name="status" id="todoStatus">
+        <br>
+
+        <button href='#' onclick="add()"> ADD your todo</button>
+        <br>
+    </form>
+    <hr>
+    <div id="edit"></div>
+    <hr>
+
+    <div class="profile"></div>
+    <script src="./js/main.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/logout.js"></script>
+    <script src="./js/register.js"></script>
+    <script src="./js/content.js"></script>
+    <script src="./js/todo.js"></script>
+
+
+
+</body>
+
+
+</html>
