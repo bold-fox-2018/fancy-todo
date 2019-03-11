@@ -5,6 +5,7 @@ function isTodoOwner(req, res, next) {
         .findById(req.params.id)
         .then(todo => {
             if (req.user.id.toString() == todo.users.toString()) {
+            // if (todo.users.includes(req.user.id)) {
                 next()
             } else {
                 res
