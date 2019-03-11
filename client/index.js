@@ -9,7 +9,7 @@ function notif(position, type, title, timer = 1500) {
   })
 }
 
-const url = `http://localhost:3000`;
+const url = `http://35.198.213.51`;
 let user = {};
 let allToDoList = [];
 let sortedList = [];

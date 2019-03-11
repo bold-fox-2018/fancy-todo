@@ -87,7 +87,7 @@ function onSignIn(googleUser) {
       isSignIn();
     })
     .fail(err => {
-      notif('top-end', 'error', response.responseJSON.err);
+      notif('top-end', 'error', err.responseJSON.err);
       loading('stop');
     })
   }
@@ -161,8 +161,8 @@ function signUp () {
       $('#form-signup').remove();
       loading('stop');
     })
-    .fail(response => {
-      notif('top-end', 'error', response.responseJSON.err);
+    .fail(err => {
+      notif('top-end', 'error', err.responseJSON.err);
       loading('stop');
     }) 
   })
