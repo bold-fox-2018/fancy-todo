@@ -1,0 +1,2 @@
+JWTTOKEN= 'jwt token'
+PASSWORD= 'email password for nodemailer'

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- jquery scriipt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <!-- goole sign ini-->
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <meta name="google-signin-client_id"
+        content="994783709716-0lg3hdbhdp2a8glo3n14nciuamav875e.apps.googleusercontent.com">
+    <script>
+        gapi.load('auth2', function () {
+            auth2 = gapi.auth2.init({
+                client_id: '994783709716-0lg3hdbhdp2a8glo3n14nciuamav875e.apps.googleusercontent.com',
+                fetch_basic_profile: true,
+                scope: 'profile https://www.googleapis.com/auth/calendar'
+            });
+
+            // Sign the user in, and then retrieve their ID.
+            // auth2.signIn().then(function () {
+            //     console.log(auth2.currentUser.get().getId(),"================SIGNIN");
+            // });
+        });
+    </script>
+
+    <title>Hello, world!</title>
+    <style>
+        .bg-primary {
+            background-color: white !important;
+            box-shadow: 0 0 5px 0px grey;
+        }
+
+        #card-font {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluit" id="navbar">
+        <div class="d-flex bg-primary">
+
+            <div class="p-2 flex-fill">Fancy Todo</div>
+            <div class="p-2 ml-auto" style="margin:0px 10px 0px 10px"><button onclick="todoform()"><i
+                        class="fas fa-pen"></i></button></div>
+            <div class="p-2 ml-auto"><button onclick="signOut()">Sign out</button></div>
+        </div>
+    </div>
+
+    <div id="login-form" class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Sign In</h5>
+                            <form class="form-signin" id="login-form">
+                                <div class="form-label-group">
+                                    <input type="email" id="loginEmail" class="form-control" placeholder="Email address"
+                                        required autofocus>
+                                    <label for="inputEmail">Email address</label>
+                                </div>
+
+                                <div class="form-label-group">
+                                    <input type="password" id="loginPassword" class="form-control"
+                                        placeholder="Password" required>
+                                    <label for="inputPassword">Password</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Remember password</label>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign
+                                    in</button>
+                                <hr class="my-4">
+                                <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit">
+                                    <div class="g-signin2" data-onsuccess="onSignIn" style="margin:auto"></div> Sign in
+                                    with Google
+                                </button>
+                            </form>
+                            <div id="manual-signup">
+                                <p style="text-align:center">don't have gmail or account, <a href="#" onclick="signup()">click here<a /></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+  
+    <div class="container-fluit">
+        <div class="row">
+            <div class="col-2" id="sidenav">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active alert-link""  id=" v-pills-home-tab" data-toggle="pill"
+                        href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"
+                        onclick="check()">My Todos</a>
+                    <a class="nav-link alert-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+                        role="tab" aria-controls="v-pills-profile" aria-selected="false" onclick="getProject()">My
+                        Project</a>
+                </div>
+            </div>
+            <div class="col-10">
+                <div id="todo-form"></div>
+                <div id="loading"></div>
+                <div id="todo-project-form"></div>
+                <div id="todo-project-header"></div>
+                <!-- <div id="todo-header"></div> -->
+                <div id="project-form"></div>
+                <div class="container-fluit">
+                    <div class="row" id="main-page">
+                    </div>
+                </div>
+                <div id="project-detail"></div>
+                <div id="project-page"></div>
+                <div id="add-member"></div>
+                <div id="project-todo-list"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="signup-form"></div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="index.js"></script>
+    <script src="project.js"></script>
+</body>
+
+</html>
