@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home Fancy To-Do</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheet/popup.css">
+    <script
+        src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="315570484806-crf4oacbdgebqdatgfjvocu76k7a3rjk.apps.googleusercontent.com">
+</head>
+<body>
+    <div id="website-wrapper">
+<!-- ================================================================================= -->
+        <div id="main-body">
+            <div class="header-container">
+                <div class="logo">
+                    <h3><a href="/">Fancy To Do</a></h3>    
+                </div>
+                <div class="user">
+                    <div class="user-container">
+                        <ul>
+                            <li><a href="#login" onclick="document.getElementById('login-wrapper').style.display='block'">Login</a></li>
+                            <li><a href="#register" onclick="document.getElementById('register-wrapper').style.display='block'">Register</a></li>
+                            <li><a href="#logout" onclick="signOut()">Logout</a></li>
+                        </ul>
+                    </div>  
+                </div>
+            </div>
+            <div id="main">
+                <div class="main-container">
+                    <div class="table-menu">
+                        <ul class="opsi-menu">
+                            <li><a href="#addtask" onclick="document.getElementById('addtask-wrapper').style.display='block'">Add a Task</a></li>
+                            <li><a href="#listtask" onclick="getTask()">Show All Task</a></li>
+                            <li><a href="">Set Project</a></li>
+                            <li><a href="">Invite Member</a></li>
+                            <li><a href="">Show Calendar</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Task Name</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Start Date</th>
+                                    <th>Due Date</th>
+                                    <th>Options</th>
+                                </tr>
+                            </thead>
+                            <tbody class="taskList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+<!-- ================================================================================= -->
+        <div class="login-popup">
+            <div id="login-wrapper" class="modal">
+                <form class="modal-content animate">     
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('login-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                        <img src="./assets/img/1.png" alt="Avatar" class="avatar">
+                        <h1 style="text-align:center">LOGIN USER</h1>
+                    </div>
+        
+                    <div class="container">
+                        <input type="text" placeholder="Enter Username" name="username" id="log-username">
+                        <input type="password" placeholder="Enter Password" name="password", id="log-password">   
+                        
+                        <input type="button" value="Login" name="submit-log" id="submit-log">
+                    </div>
+                    <br>
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                </form>
+            </div>
+        </div>
+<!-- ================================================================================= -->
+        <div class="register-popup">
+            <div id="register-wrapper" class="modal">
+                <form class="modal-content animate">     
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('register-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                        <h1 style="text-align:center">Register User</h1>
+                    </div>
+        
+                    <div class="container">
+                        <input type="text" placeholder="Enter First Name" name="firstName" id="firstName">
+                        <input type="text" placeholder="Enter Last Name" name="lastName" id="lastName">
+                        <input type="text" placeholder="Enter Email" name="email" id="email">
+                        <input type="text" placeholder="Enter Username" name="username" id="username">
+                        <input type="password" placeholder="Enter Password" name="password" id="password">    
+                        <input type="button" value="Register" name="submit-reg" id="submit-reg">
+                    </div>
+                </form>
+            </div>
+        </div>
+<!-- ================================================================================= -->
+        <div class="addtask-popup">
+            <div id="addtask-wrapper" class="modal">
+                <form class="modal-content animate">     
+                        <div class="imgcontainer">
+                            <span onclick="document.getElementById('addtask-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                            <img src="./assets/img/1.png" alt="Avatar" class="avatar">
+                            <h1 style="text-align:center">ADD NEW TASK</h1>
+                        </div>
+        
+                    <div class="container">
+                        <input type="text" placeholder="Enter Task Name" name="taskName" id="taskName">
+                        <select name="priority" id="priority">
+                            <option value="Low">Low Priority</option>
+                            <option value="Medium">Medium Priority</option>
+                            <option value="High">High Priority</option>
+                            <option value="Critical">Critical Priority</option>
+                        </select>
+                        <!-- <label for="userdate">Due Date</label> -->
+                        <input type="date" name="startdate" id="startdate" onchange="SDate()" required>
+                        <input type="date" name="duedate" id="duedate" onchange="TDate()" required>
+                           
+                        <input type="button" value="Add Task" name="submit-task" id="submit-task">
+                    </div>
+                </form>
+            </div>
+        </div>
+<!-- ================================================================================= -->
+        <div class="update-popup">
+            <div id="update-wrapper" class="modal">
+                <form class="modal-content animate">     
+                        <div class="imgcontainer">
+                            <span onclick="document.getElementById('update-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                            <img src="./assets/img/1.png" alt="Avatar" class="avatar">
+                            <h1 style="text-align:center">ADD NEW TASK</h1>
+                        </div>
+        
+                    <div class="container">
+                        <input type="text" name="idUpdate" id="idUpdate" disabled>
+                        <input type="text" placeholder="Enter Task Name" name="taskUpdate" id="taskUpdate">
+                        <select name="priorityUdate" id="priorityUpdate">
+                            <option value="Low">Low Priority</option>
+                            <option value="Medium">Medium Priority</option>
+                            <option value="High">High Priority</option>
+                            <option value="Critical">Critical Priority</option>
+                        </select>
+                        <select name="statusUpdate" id="statusUpdate">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                        <!-- <label for="userdate">Due Date</label> -->
+                        <input type="date" name="startUpdate" id="startUpdate" onchange="SSDate()" required>
+                        <input type="date" name="dueUpdate" id="dueUpdate" onchange="TTDate()" required>
+                        
+                        <input type="button" value="Update Task" name="submit-update" id="submit-update">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/js/popup.js"></script>
+    <script src="./assets/js/register.js"></script>
+    <script src="./assets/js/login.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
