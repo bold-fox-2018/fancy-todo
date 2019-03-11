@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="548876196185-1haf0uce56mqrhcdi9vcn784bntjuqur.apps.googleusercontent.com">
+    <title>Document</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./sign.js"></script>
+    <script src="./todo.js"></script>
+    <script src="./user.js"></script>
+    <link rel="stylesheet" href="'./index.css'">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+        
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .google {
+            right: 0%;
+        }
+        
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        
+        form {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            /* border: 1px solid #ccc; */
+            border-radius: 4px;
+            margin: 8px 0;
+            border: 1px solid black;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        
+        input[type=submit] {
+            width: 10%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        
+        .logout {
+            position: relative;
+            left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <div class="google">
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        </div>
+        <div class="logout">
+            <a href="" onclick="signOut();">Sign out</a>
+        </div>
+    </div>
+    <div class="classTodo">
+        <div class="addTodo">
+            <form id="createTodo">
+                <h1>Add Todo</h1>
+                Name:<br>
+                <input type="text" id="name">
+                <br> Description:
+                <br>
+                <textarea cols="30" rows="10px" id="description"></textarea>
+                <br>Due Date:<br>
+                <input type="date" id="dueDate">
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="readTodo">
+            <h1>List</h1>
+            <table>
+                <div id="todos">
+                </div>
+            </table>
+        </div>
+        <div class="updateTodo">
+            <form id="updateTodo">
+                <h1>Update Todo</h1>
+                Name:<br>
+                <input type="text" value="name" id="name">
+                <br> Description:
+                <br>
+                <textarea value="description" cols="30px" rows="10px" id="description"></textarea>
+                <br>Status:<br>
+                <select id="status">
+                            <option value="true">Complete</option>
+                            <option value="false">Incomplete</option>
+                        </select>
+                <br>Due Date:<br>
+                <input type="date" value="dueDate" id="dueDate">
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <div class="user">
+        <div class="registerUser">
+            <form id="register">
+                <h1>Register</h1>
+                Email:<br>
+                <input type="email" id="email">
+                <br> Password:
+                <br>
+                <input type="password" id="password">
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="loginUser">
+            <form id="login">
+                <h1>Login</h1>
+                Email:<br>
+                <input type="email" id="emailLogin" name="emailLogin">
+                <br> Password:
+                <br>
+                <input type="password" id="passwordLogin" name="passwordLogin">
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
