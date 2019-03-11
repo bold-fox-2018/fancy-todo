@@ -9,6 +9,6 @@ routes.get('/', function (req, res, next) {
 routes.post('/register', register);
 routes.post('/login', login);
 routes.get('/auth', auth, checkUser);
-routes.get('/users', findAll);
+routes.get('/users', auth, findAll);
 
 module.exports = routes;

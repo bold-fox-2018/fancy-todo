@@ -13,7 +13,7 @@ let taskSchema = new Schema({
   status: {
     type: String,
     enum: {
-      values: ['progress', 'finish'],
+      values: ['Progress', 'Finish'],
       message: 'Status is required'
     },
     trim: true

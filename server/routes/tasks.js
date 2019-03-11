@@ -3,7 +3,6 @@ const { createTask, findTask, findAllTask, updateTask, deleteTask } = require('.
 const authenticate = require('../middlewares/authenticate');
 
 routes.use(authenticate);
-
 routes.post('/', createTask);
 routes.get('/', findAllTask);
 routes.get('/:id', findTask);

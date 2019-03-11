@@ -11,7 +11,10 @@ module.exports = {
     };
     User.create(newUser)
       .then(user => {
-        res.status(201).json(user);
+        res.status(201).json({
+          user,
+          message: 'Successfully register'
+        });
       })
       .catch(err => {
         let error = err.errors;
@@ -61,8 +64,9 @@ module.exports = {
       })
   },
   findAll(req, res) {
+    console.log(req.auth_user);
     User
-      .find({}).select('-password')
+      .find({ _id: { $ne: req.auth_user.id } }).select('-password')
       .then(user => {
         res.json(user);
       })

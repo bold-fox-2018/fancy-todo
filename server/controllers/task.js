@@ -11,7 +11,10 @@ module.exports = {
     };
     Task.create(newTask)
       .then(task => {
-        res.status(201).json(task);
+        res.status(201).json({
+          task,
+          message: 'Task created!'
+        });
       })
       .catch(err => {
         let error = err.errors;
@@ -44,15 +47,12 @@ module.exports = {
       });
   },
   findAllTask(req, res) {
+    console.log(req.auth_user);
     Task
-      .find({})
+      .find({ owner: req.auth_user.id })
       .populate({ path: 'owner', select: 'name' })
       .then(tasks => {
-        if (tasks.length) {
-          res.json(tasks);
-        } else {
-          res.status(404).json({ message: 'Task not found' });
-        }
+        res.json(tasks);
       })
       .catch(err => {
         res.status(500).json(err);

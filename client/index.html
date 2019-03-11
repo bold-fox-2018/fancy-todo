@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todo Zapper</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.1/css/mdb.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap-datetimepicker.min.css">
+  <link type="text/css" rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark darken-2">
+    <a class="navbar-brand" href="" onclick="event.preventDefault()">Todo Zapper</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+      aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a id="mytodos" class="nav-link active" href="">MyTodos</a>
+        </li>
+        <li class="nav-item">
+          <a id="projects" class="nav-link" href="">Projects</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link waves-effect waves-light">
+            <i class="fab fa-google-plus-g"></i>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navUser" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navUser">
+            <a onclick="signOut()"lass="dropdown-item" href="">Signout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Register/Login -->
+  <div id="form-register-login" class="container">
+    <div class="row">
+      <div class="col d-flex justify-content-center align-items-center" style="height: 90vh;">
+        <!-- Form Signup/Signin -->
+        <div class="login-box border">
+          <div class="lb-header">
+            <a href="" class="active" id="login-box-link">Login</a>
+            <a href="" id="signup-box-link">Sign Up</a>
+          </div>
+          <div class="social-login">
+
+          </div>
+
+          <!-- Form Login -->
+          <form class="email-login">
+            <div class="u-form-group">
+              <input id="login-email" type="email" placeholder="Email" />
+            </div>
+            <div class="u-form-group">
+              <input id="login-password" type="password" placeholder="Password" />
+            </div>
+            <div class="u-form-group"">
+              <button onclick="login()" class=" mt-4 btn bg-dark">Log in</button>
+            </div>
+          </form>
+          <!-- Form Login -->
+
+          <!-- Form Register -->
+          <form class="email-signup" autocomplete="off">
+            <div class="u-form-group">
+              <input id="register-name" type="name" placeholder="Your name..." />
+            </div>
+            <div class="u-form-group">
+              <input id="register-email" type="email" placeholder="Email" />
+            </div>
+            <div class="u-form-group">
+              <input id="register-password" type="password" placeholder="Password" />
+            </div>
+            <div class="u-form-group">
+              <button onclick="signUp()" class="btn bg-dark">Sign Up</button>
+            </div>
+          </form>
+          <!-- Form Register -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Register/Login -->
+
+
+  <!--Task Section -->
+  <div id="task-contents" class="row">
+    <!-- Header -->
+    <div class="col-lg-12">
+
+      <!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid text-center randomImage">
+        <div class="container text-white text-center">
+          <h2 id="intro-name" class="display-4 h2-responsive"></h2>
+          <p class="lead">What do you want to do?</p>
+          <a class="btn btn-outline-white btn-md" data-toggle="modal" data-target="#taskModal"
+            onclick="addOnChange()"><i class="fas fa-clone left"></i> Add Task</a>
+        </div>
+      </div>
+      <!-- Jumbotron -->
+
+    </div>
+    <!-- Header -->
+
+    <!-- Task -->
+    <div class="container">
+      <div id="list-tasks" class="row">
+      </div>
+    </div>
+    <!-- Task -->
+
+  </div>
+  <!--Task Section -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Project Section -->
+  <!-- <div id="project-contents" class="row">
+
+    <div class="col-3 border-right">
+      <div class="btn-new p-3">
+        <div class="md-form">
+          <label for="">Project Name</label>
+          <input type="text" id="create-project" class="form-control">
+        </div>
+        <button onclick="newProject()" class="btn btn-md btn-outline-dark">Create Project</button>
+      </div>
+      <ul id="project-lists" class="list-group"></ul>
+    </div>
+
+    <div class="col-9">
+      
+      <div id="project-intro" class="jumbotron jumbotron-fluid text-center randomImage">
+        <div class="container text-white text-center">
+          <h2 id="project-title" class="display-4 h2-responsive"></h2>
+          <p class="lead">Start your project task here</p>
+
+          <a class="btn btn-outline-info btn-md" data-toggle="modal" data-target="#memberModal" onclick="findUser()"><i
+              class="fab fa-playstation"></i> Invite member</a>
+
+          <a class="btn btn-outline-white btn-md" data-toggle="modal" data-target="#showModal" onclick="addOnChange()"><i class="fas fa-clone left"></i> Add Task
+          </a>
+
+        </div>
+      </div>
+      
+      <div id="project-task" class="d-flex justify-content-center">
+      </div>
+    </div>
+  </div> -->
+
+
+
+
+  <!-- Modal Member -->
+  <!-- <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="memberLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="memberLabel">Member List</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="project-member" class="list-group"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-md btn-outline-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- Modal Member -->
+
+
+
+
+
+
+
+
+
+  <!-- Task Modal -->
+  <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="taskModalLabel">Add Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="task-name">Task Name</label>
+          <div class="md-form">
+            <input type="text" id="task-name" class="form-control">
+          </div>
+          <label for="task-description">Description</label>
+          <div class="md-form">
+            <textarea type="text" id="task-description" class="md-textarea form-control" rows="2"></textarea>
+          </div>
+          <div class="md-for">
+            <label for="task-status">Status</label>
+            <select class="browser-default custom-select mb-4" id="task-status">
+              <option value="" disabled>Choose option</option>
+              <option value="Progress" selected>Progress</option>
+              <option value="Finish">Finish</option>
+            </select>
+          </div>
+          <label for="task-date">Due date</label>
+          <div class="md-form">
+            <input type="text" id="task-date" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="close" type="button" class="btn btn-md btn-outline-secondary" data-dismiss="modal">Close</button>
+          <button id="save" onclick="addTask()" type="button" class="btn btn-md btn-outline-primary">Save</button>
+          <button id="update" type="button" class="btn btn-md btn-outline-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Task Modal -->
+
+
+
+
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Moment -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" type="text/javascript"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
+  <script src="./js/bootstrap-datetimepicker.min.js"></script>
+  <!-- Swal -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <!-- Custom JS -->
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
