@@ -1,4 +1,4 @@
-const serverUrl = `http://localhost:3000`
+const serverUrl = `http://35.197.153.178`
 
 $(document).ready(() => {
     if (!localStorage.getItem(`token`)) {
