@@ -79,19 +79,19 @@ function deleteTodo(id) {
 //
 //  S E A R C H  T O D O
 //
-function searchTodo(id) {
-    console.log(id);
-    // $.ajax({
-    //     url: `${myUrl}/todos/${id}`,
-    //     method: 'GET',
-    //     headers: {
-    //         token: localStorage.getItem('token')
-    //     }
-    // })
-    //     .done(function (response) {
-    //         console.log(response);
-    //     })
-    //     .fail(function (err) {
-    //         console.log(err);
-    //     })
+function searchTodo() {
+    let word = $('#searchTodo').val()
+    $.ajax({
+        url: `${myUrl}/todos?word=${word}`,
+        method: 'GET',
+        headers: {
+            token: localStorage.getItem('token')
+        }
+    })
+        .done(function (response) {
+            console.log(response);
+        })
+        .fail(function (err) {
+            console.log(err);
+        })
 }
