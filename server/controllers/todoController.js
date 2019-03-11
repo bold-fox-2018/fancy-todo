@@ -21,21 +21,17 @@ class TodoController {
     }
 
     static list(req, res) {
+        console.log(req.query.word);
         User.findOne({ _id: req.userLoggedIn }).populate('todoList')
             .then(function (userTodos) {
-                res.status(200).json(userTodos.todoList)
-            })
-            .catch(function (err) {
-                res.status(500).json({
-                    message: `Internal Server Error`, err
-                })
-            })
-    }
-
-    static listOne(req, res) {
-        Todo.findById({ _id: req.params.id })
-            .then(function (todo) {
-                res.status(200).json(todo)
+                if (req.query.word) {
+                    let results = [];
+                    userTodos.todoList.forEach(e => {
+                        if (e.name.indexOf(req.query.word) != -1) results.push(e)
+                    });
+                    res.status(200).json(results);
+                }
+                else res.status(200).json(userTodos.todoList);
             })
             .catch(function (err) {
                 res.status(500).json({
