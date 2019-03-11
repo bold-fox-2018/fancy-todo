@@ -27,8 +27,8 @@ class UserController {
                 }
             })
             .then(function (user) {
-                const { id } = user._id
-                const token = jwt.sign({ id, email }, process.env.JWT_SECRET);
+                const { _id } = user._id
+                const token = jwt.sign({ _id, email }, process.env.JWT_SECRET);
                 res.status(200).json({ token, email })
             })
             .catch(function (err) {

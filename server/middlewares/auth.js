@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 module.exports = function (req, res, next) {
+    console.log(req.headers);
     if (req.headers.hasOwnProperty('token')) {
         try {
             req.userLoggedIn = jwt.verify(req.headers.token, process.env.JWT_SECRET)

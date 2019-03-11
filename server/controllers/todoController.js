@@ -11,8 +11,6 @@ class TodoController {
                 return User.findOneAndUpdate({ _id: req.userLoggedIn }, { $push: { todoList: newTodo._id } }, { new: true }).populate('todoList')
             })
             .then(function (user) {
-                console.log("klkl");
-                console.log(user);
                 res.status(201).json(user.todoList[user.todoList.length - 1]);
             })
             .catch(function (err) {
@@ -23,7 +21,7 @@ class TodoController {
     }
 
     static list(req, res) {
-        User.findOne({ _id: req.userLoggedIn._id }).populate('todoList')
+        User.findOne({ _id: req.userLoggedIn }).populate('todoList')
             .then(function (userTodos) {
                 res.status(200).json(userTodos.todoList)
             })
@@ -47,8 +45,6 @@ class TodoController {
     }
 
     static update(req, res) {
-        console.log(req.body);
-        console.log(req.params);
         Todo.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
             .then(function (todo) {
                 res.status(200).json(todo)

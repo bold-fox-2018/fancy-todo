@@ -32,21 +32,30 @@ $(document).ready(function () {
     //      L I S T   T O D O
     //
     $('#fa-list').click(function () {
+        console.log("Masuk");
+        console.log(localStorage.getItem('token'));
         $.ajax({
             url: `${myUrl}/todos`,
             method: 'GET',
-            headers: { token: localStorage.token }
+            headers: { token: localStorage.getItem('token') }
         })
             .done(function (todos) {
                 console.log(todos);
                 let html = ``;
-                todos.forEach((e, index) => {
+                let prepend = `
+                <table>
+                <tr>
+                    <td><input class="form-control" type="text" id="searchTodo" placeholder="Enter title"></td>
+                    <td><i  onclick="searchTodo()" class="fa fa-search btn btn-info"></i></td>
+                </tr>
+                </table>`;
+                todos.forEach((e) => {
                     let pinned = ``;
-                    if (e.pinned) pinned = `<a href="#"><i class="fa fa-thumb-tack"></i></a>`;
-                    else pinned = `<a href="#"><i class="fa fa-thumb-tack unpinned"></i></a>`
+                    if (e.pinned) pinned = `<a onclick="updateTodo('${e._id}',false)" href="#"><i class="fa fa-thumb-tack"></i></a>`;
+                    else pinned = `<a onclick="updateTodo('${e._id}',true)" href="#"><i class="fa fa-thumb-tack unpinned"></i></a>`
                     let date = new Date(e.due_date).toString().split(' ');
                     console.log(date);
-                    html += ` 
+                    let doc = ` 
                     <div class="todo" id="${e._id}">
                         <div class="title">
                         <span class="hidTodo${e._id}" >${e.name}</span>${pinned}
@@ -84,8 +93,12 @@ $(document).ready(function () {
                             <span class="due_date hidTodo${e._id}" >${date[0]} ${date[1]} ${date[3]}</span>
                         </div>
                     </div>`
+
+                    if (e.pinned) prepend += doc;
+                    else html += doc;
                 });
                 $('#content').html(html)
+                $('#content').prepend(prepend)
             })
             .fail(function (err) {
                 console.log(err);
