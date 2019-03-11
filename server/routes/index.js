@@ -1,9 +1,17 @@
 var express = require('express')
 const router = express()
-const controllers = require('../controllers/')
+const {UserController,ToDoController} = require('../controllers/')
 
-router.get('/',controllers.homePage)
-router.post('/signin',controllers.signIn)
-router.post('/signup',controllers.signUp)
+// user route
+router.get('/',UserController.homePage)
+router.post('/user/signin',UserController.signIn)
+router.post('/user/signup',UserController.signUp)
+router.post('/user/Gsignin',UserController.Gsignin)
+
+// todo route
+router.get('/todo',ToDoController.read)
+router.post('/todo/create',ToDoController.create)
+router.put('/todo/update',ToDoController.update)
+router.delete('/todo/delete',ToDoController.delete)
 
 module.exports = router;
