@@ -37,7 +37,7 @@ function signInForm() {
       </div>
       <div class="row">
           <div class="input-field col s6">
-            <button class="waves-effect red btn-small" type="submit" onclick="signIn()">SUBMIT</button>
+            <button class="waves-effect red btn-small" type="submit" onclick="signIn()">SIGN IN</button>
           </div>
           <div class="input-field col s6">
           <button class="waves-effect btn-flat" onclick="signUpForm()">Don't have an account?</button>
@@ -123,7 +123,7 @@ function signUpForm() {
         </div>
         <div class="row">
               <div class="input-field col s6">
-                <button class="waves-effect red btn-small" type="submit" onclick="signUp()">SUBMIT</button>
+                <button class="waves-effect red btn-small" type="submit" onclick="signUp()">SIGN UP</button>
               </div>
             </div>
           </div>
@@ -170,8 +170,6 @@ function onSignIn(googleUser) {
         }
     })
         .done(response => {
-            // console.log(response.id);
-
             localStorage.setItem('token', response.token)
             let html = `<button class="waves-effect red btn-flat button-logout" onclick="signOut()">LOGOUT</button>`
             $('.login-google').hide()
