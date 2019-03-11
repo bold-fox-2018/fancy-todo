@@ -1,11 +1,11 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-const { comparePass, jwtSign } = require('../helpers/password')
+const { comparePass, jwtSign } = require('../helpers/util')
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 module.exports = {
-    authGoogle: (req,res) => {
+    authGoogle: (req, res) => {
         let payload = null
         client
             .verifyIdToken({
@@ -15,29 +15,37 @@ module.exports = {
             .then(ticket => {
                 payload = ticket.getPayload()
                 return User
-                    .findOne({email: payload.email})
+                    .findOne({ email: payload.email })
             })
             .then(user => {
-                if(!user) {
-                    User
+                if (!user) {
+                    return User
                         .create({
                             email: payload.email,
-                            password : process.env.GOOGLE_PASS,
+                            password: process.env.GOOGLE_PASS,
                             source: `google`,
                             fullName: payload.name,
                             role: 'user'
                         })
                         .then(newUser => {
+                            let googleUser = {
+                                email: newUser.email,
+                                id: newUser._id
+                            }
                             res.status(201).json({
                                 message: `create success`,
-                                data : newUser,
-                                token : jwtSign(payload)
+                                data: newUser,
+                                token: jwtSign(googleUser)
                             })
                         })
                 } else {
+                    let googleUser = {
+                        email: user.email,
+                        id: user._id
+                    }
                     res.status(200).json({
                         message: `sign in success`,
-                        token: jwtSign(payload)
+                        token: jwtSign(googleUser)
                     })
                 }
             })
@@ -74,15 +82,15 @@ module.exports = {
                     if (!comparePass(req.body.password, user.password)) {
                         console.log('masuk')
                         res.status(400).json({ message: `invalid username/password` })
-                    } 
+                    }
                     else {
                         let token = jwt.sign({
                             id: user._id,
                             email: user.email,
                             fullName: user.fullName,
                             role: user.role
-                        }, process.env.JWTSECRET )
-                        res.status(200).json({token})
+                        }, process.env.JWTSECRET)
+                        res.status(200).json({ token })
                     }
                 }
             })
@@ -90,10 +98,10 @@ module.exports = {
                 res.status(500).json(err)
             })
     },
-    findAll : (req,res) => {
+    findAll: (req, res) => {
         User
             .find({
-                _id : { $ne: req.user.id}
+                _id: { $ne: req.user.id }
             })
             .then(users => {
                 res.status(200).json(users)
