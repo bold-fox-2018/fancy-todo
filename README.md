@@ -49,6 +49,3 @@ $ npm install <br/>
 $ npm start <br/>
 
 $ npm run dev
-
-
-b9c8e17a97dd2db657e3a7531bf0975aa9edd326
