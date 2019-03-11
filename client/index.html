@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="google-signin-client_id" content="348804097042-g8i47memp91iu9be12u9l0b8qln31bob.apps.googleusercontent.com">
   <title>ToDo Fancy</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="./styles/main.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./main.js"></script>
+  <script src="./jquery-3.3.1.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -15,44 +17,50 @@
 </head>
 <body style="background-image: url(https://cdn-images-1.medium.com/max/2560/1*LI654qGDaGGtqPMoQtIWsw.jpeg); background-repeat: no-repeat; background-size: full;">
      <!-- Main page!! -->
+     <div id="navbar">
+        <nav class="bg-light navbar-light bg:transparent">
+            <ul class="nav py-2">
+              <li class="nav-item px-4">
+                <a href="#" class="navbar-brand">ToDo Fancy</a>
+              </li>
+              <li class="nav-item ml-auto">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTodo" id="buttonAdd">Add New Task</button>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" id="signOut" onclick="signOut();">Sign Out</a>
+              </li>
+            </ul>
+            </nav>
+     </div>
     <main class="container">
-      <nav class="bg-light navbar-light bg:transparent">
-        <ul class="nav py-2">
-          <li class="nav-item px-4">
-            <a href="#" class="navbar-brand">ToDo Fancy</a>
-          </li>
-          <li class="nav-item ml-auto">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTodo">Add New Task</button>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link" id="signOut" onclick="signOut();">Sign Out</a>
-          </li>
-        </ul>
-      </nav>
-  <div id="inlogin">
-    <div>
-        <form>
-          <ul>
-            <li>
-              name: <input>
-            </li>
-            <li>
-              email: <input>
-            </li>
-            <li>
-              password: <input>
-            </li>
-            <li>
-              gender: <input>
-            </li>
-          </ul>
-        </form>
+    <div id="inlogin"class="Aligner">
+          
+        <form method="POST">
+                <!-- <label for="name">Name</label>
+                <br>
+                <input type="text" id="name">
+                <br> -->
+                <label for="email">email</label>
+                <br>
+                <input type="email" id="email">
+                <br>
+                <label for="password">password</label>
+                <br>
+                <input type="password" id="password">
+                <!-- <br>
+                <label for="gender">gender</label>
+                <select name="gender" id="gender">
+                  <option value="male">male</option>
+                  <option value="female">female</option>
+                </select> -->
+                <br>
+            <button type="submit" id="submit" on>submit</button>
+          </form>
+      <hr>
+    <div id="my-signin2"></div>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
-    <hr>
-  <div id="my-signin2"></div>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-  </div>
-  <div id="inhome">
+    <div id="inhome">
      <!-- Modallll! -->
     <div class="modal fade" id="addTodo" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
@@ -80,7 +88,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel">Cancel</button>
-            <button type="button" class="btn btn-primary" id="createTask">Add</button>
+            <button type="button" class="btn btn-primary" id="createTask" onclick="addTask();">Add</button>
           </div>
   
         </div>
@@ -113,7 +121,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel">Cancel</button>
-              <button type="button" class="btn btn-primary" id="updateTask">Update</button>
+              <button type="button" class="btn btn-primary" id="updateTask" onclick="updateTask()">Update</button>
             </div>
   
           </div>
@@ -122,13 +130,9 @@
       <h1 id="welcome" class="display-2 text-center text-white mt-5 bg-semi-transparent-primary rounded col-10 mx-auto"></h1>
       <div class="container text-center p-3 mt-5 bg-light bg-semi-transparent rounded">
         <h2 class="mb-3">Below here is your Task</h2>
-        <div class="container-fluid" id="listTodo">
-  
-        </div>
+        <div class="container-fluid" id="listTodo"></div>
       </div>
+    </div>
     </main>
-    <!-- Script only -->
-    <script src="./main.js"></script>
-  </div>
-
+</body>
 </html>
