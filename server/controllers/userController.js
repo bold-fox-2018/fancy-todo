@@ -1,3 +1,4 @@
+require('dotenv').config();
 const User = require('../models/user.js');
 const decodeGoogleUserInfo = require('../helpers/decodeGoogleUserInfo.js');
 const hashPassword = require('../helpers/hashPassword.js');

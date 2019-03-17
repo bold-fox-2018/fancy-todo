@@ -13,9 +13,9 @@ module.exports = () => {
     console.log('cron connected')
   });
 
-  const everyMinutes = '* * * * *';
+  const everyMinutes = '0 0 1 * *';
 
-  cron.schedule(everyMinutes, () => {
+  cron.schedule(everyDays, () => {
     Project
       .find()
       .populate('invite')

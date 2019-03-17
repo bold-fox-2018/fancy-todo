@@ -4,7 +4,8 @@ const getJWT = require('../helpers/getJWT.js');
 
 class TodoController {
 
-  static read(req, res){
+  static read(req, res)
+    const {data} = getJWT(req.headers.token, 'verify');
     Todo
       .find({
         userId: req.userLogin.userId,
@@ -18,7 +19,8 @@ class TodoController {
       })
   }
 
-  static create(req, res){
+  static create(req, res)
+    const {data} = getJWT(req.headers.token, 'verify');
     Todo
       .create({
         name: req.body.name,
@@ -26,7 +28,7 @@ class TodoController {
         status: 'uncomplete',
         updatedDate: new Date,
         dueDate: req.body.dueDate,
-        userId: req.userLogin.userId,
+        userId: data._id,
         type: 'personal'
       })
       .then(todo => {
