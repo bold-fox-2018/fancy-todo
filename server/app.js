@@ -14,7 +14,7 @@ const projectRoute = require('./routes/projectRoute.js');
 const app = express();
 
 const databaseName = 'fancy_todo_isro';
-const urlDatabase = `mongodb://localhost:27017/${databaseName}`;
+const urlDatabase = `mongodb+srv://biaryakin:12345@cluster0-j8ssj.mongodb.net/fancy?retryWrites=true`;
 
 mongoose.connect(urlDatabase, {useNewUrlParser: true});
 

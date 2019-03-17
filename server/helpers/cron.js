@@ -6,14 +6,9 @@ const queue = kue.createQueue();
 const sendEmail = require('./nodemailer');
 
 module.exports = () => {
-  kue.app.listen(3005);
-  const testCron = '* * * * *';
+  kue.app.listen(3006);
 
-  cron.schedule(testCron, () => {
-    console.log('cron connected')
-  });
-
-  const everyMinutes = '0 0 1 * *';
+  const everyDays = '0 0 1 * *';
 
   cron.schedule(everyDays, () => {
     Project

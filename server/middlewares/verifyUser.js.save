@@ -40,7 +40,7 @@ module.exports = {
       })
       .then(todo => {
         if (todo.userId.toString() != req.userLogin.userId.toString()) {
-          res.status(400).json({ err: 'didnt authorized' });
+          res.status(400).json({ err: });
         } else {
           next();
         }

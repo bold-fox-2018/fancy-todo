@@ -7,8 +7,8 @@ class TodoController {
   static read(req, res){
     Todo
       .find({
-        userId: req.userLogin.userId,
-	type: 'personal'
+        userId: req.userLogin.user,
+        type: 'personal'
       })
       .then(allTodo => {
         res.status(200).json(allTodo);
