@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="565541226178-aqji8ukkj79iujhsl2m0i6u2bqpi8gnq.apps.googleusercontent.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fancy To-Do</title>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <style>
+        .logout {
+            border: 1px solid #dedede;
+            /* height: 10px; */
+            /* width: 120px; */
+            float: right;
+            position: relative;
+            top: 35px;
+            right: -80px;
+            /* top: 200px;  */
+        }
+        .profile {
+            border: 1px solid #dedede;
+            height: 200px;
+            width: 200px;
+        }
+
+        .picbox {
+            height: 150px;
+            width: 150px;
+        }
+
+        html, body {
+            margin: 0 auto;
+            padding: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        header {
+            border: 1px solid #dedede;
+            height: 60px;
+            text-align: center;
+            background-color: hsla(360, 70%, 46%, 0.64);
+            position: fixed;
+            width: 100%;
+            margin: 0;
+            top: 0;
+        }
+
+        .login, .register {
+            float: left;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .home {
+            /* border: 1px solid red; */
+            text-decoration: none;
+            display: inline-block;
+            /* padding-bottom: -20px; */
+        }
+
+        .register:hover ,.login:hover, .home:hover {
+            color: whitesmoke;
+        }
+
+        .g-signin2 {
+            float: right;
+            position: relative;
+            /* top: -50px; */
+            right: 10px;
+        }
+
+        section {
+            /* border: 1px solid #dedede; */
+            height: 600px;
+            margin-top: 60px;
+            /* background-color: hsla(360, 74%, 46%, 0.05); */
+            /* z-index: -1; */
+        }
+
+        .todos {
+            border: 1px solid #dedede;
+            width: 500px;
+            margin: 0 auto;
+            height: 600px;
+            background-color: whitesmoke;
+            /* position: fixed; */
+            /* margin-top: 60px; */
+            margin: auto;
+            padding: auto;
+        }
+
+        .list {
+            /* border: 1px solid red; */
+            padding: 30px;
+        }
+
+        .form {
+            position: fixed;
+            /* border: 1px solid red; */
+            width: 30%;
+            height: 400px;
+            right: 0px;
+        }
+
+        section .form form #name {
+            height: 30px;
+            width: 273px;
+        }
+
+        .registrasi {
+            position: fixed;
+            /* border: 1px solid red; */
+            width: 30%;
+            height: 200px;
+            top: 260px;
+        }
+
+        .signin {
+            position: fixed;
+            /* border: 1px solid red; */
+            width: 30%;
+            height: 200px;
+        }
+
+        .signout {
+            float: left;
+        }
+    </style>
+    <script src="./js/googlesignin.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/logout.js"></script>
+</head>
+<body>   
+    <header>
+        
+        <a href="" class="home"><h2>Home</h2></a>
+        <div class="g-signin2" data-onsuccess="onSignIn">
+        </div>
+        <div class="logout">
+           
+        </div>
+    </header>
+
+    <section>
+
+        <div class="form" >
+            <form action="" method="post" id="todolist"> 
+                 <input type="text" name="name" id="name" placeholder="What is your title's todo?" autocomplete="off"> <br>
+                <textarea name="description" id="description" placeholder="Description" cols="32px" rows="10" style="resize: none" ></textarea> <br>
+                <select name="status" id="status" style="border: 1px solid #dedede; height: 30px;">
+                    <option value="true">Complete</option>
+                    <option value="false">Uncomplete</option>
+                </select> <br>
+                <input type="date" name="due_date" id="due_date"> <br>
+                <button type="submit" style="border: 1px solid #dedede; height: 30px;" id="onsubmit" >Create</button>
+            </form>
+        </div>
+
+        <div class="registrasi">
+            <form action="" method="post" id='register'>
+                <input type="email" name="email" id="email" placeholder="Type your email..." autocomplete="off" style="border: 1px solid #dedede; height: 30px; width: 273px"> <br>
+                <input type="password" name="password" id="password" placeholder="Type your password" style="border: 1px solid #dedede; height: 30px; width: 273px;"> <br>
+                <button type="submit" style="border: 1px solid #dedede; height: 30px;">SignUp</button>
+            </form>
+        </div>
+
+        <div class="signin" >
+            <form action="" method="post" id='login' >
+                <input type="email" name="email" id="email" placeholder="Type your email..." autocomplete="off" style="border: 1px solid #dedede; height: 30px; width: 273px"> <br>
+                <input type="password" name="password" id="password" placeholder="Type your password" style="border: 1px solid #dedede; height: 30px; width: 273px;"> <br>
+                <button type="submit" style="border: 1px solid #dedede; height: 30px;">Signin</button>
+            </form>
+        </div>
+
+        
+
+        <div class="todos">
+
+        </div>
+
+    </section>
+
+    <footer>
+
+    </footer>
+
+   
+
+    
+    <!-- <div class="profile">
+    
+    </div> -->
+
+</body>
+</html>
