@@ -30,7 +30,6 @@ class ClassController {
   }
 
   static login (req, res) {
-    if(req.body.loginVia == 'website') {
       User
         .findOne({
           email: req.body.email
@@ -43,9 +42,11 @@ class ClassController {
           } else {
             let isValid = bcrypt.compareSync(req.body.password, user.password);
             if(isValid) {
+              // console.log( user.email, '<<<<<<<<<<<<<<', process.env.GOOGLE_DEFAULT_PASSWORD)
               let token = jwtConvert.sign({
                 email: user.email
               })
+              // console.log(token)
               res.status(200).json({
                 token: token
               })
@@ -56,39 +57,10 @@ class ClassController {
             }
           }
         })
-    } else if(req.body.loginVia == 'google') {
-      googleSignin(req.body.id_token)
-        .then(user => {
-          User
-            .findOne({
-              email: user.email
-            })
-            .then(findUser => {
-              if(!findUser) {
-                User
-                  .create({
-                    email: user.email,
-                    password: process.env.GOOGLE_DEFAULT_PASSWORD
-                  })
-                  .then(registerUser => {
-                    let token = jwtConvert.sign({
-                      email: registerUser.email
-                    })
-                    res.status(201).json({
-                      token: token
-                    })
-                  })
-              } else {
-                let token = jwtConvert.sign({
-                  email: user.email
-                })
-                res.status(200).json({
-                  token: token
-                })
-              }
-            })
+        .catch((err) => {
+          // console.log('masuk')
+          res.status(400).json(err)
         })
-    }
   }
 
   static findAll(req, res) {

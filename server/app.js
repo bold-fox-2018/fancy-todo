@@ -12,6 +12,7 @@ const todoRouter = require('./routes/todoRouter')
 const app = express()
 
 app.use(cors())
+// console.log(process.env)
 
 mongoose.connect('mongodb://localhost:27017/fancy-todo', { useNewUrlParser: true })
 
