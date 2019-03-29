@@ -29,12 +29,21 @@ function profileAuthorization(req, res, next) {
 
 //is authenticated user also the owner of the task
 function taskAuthorization(req, res, next) {
-    console.log(req.params.id)
     console.log(req.decoded)
-    Todo    
-        .findOne({user: req.decoded.id})
-        .then(({data}) => {
-            console.log(data)
+    Todo
+        .findOne({
+            user: req.decoded.id
+        })
+        .then(todo => {
+            if (req.decoded.id != todo.user) {
+                res
+                    .status(401)
+                    .json({
+                        msg: `Unauthorized access`
+                    })
+            } else {
+                next()
+            }
         })
         .catch(err => {
             console.log(err)
@@ -43,7 +52,24 @@ function taskAuthorization(req, res, next) {
 
 // is authenticated user also the owner of the project
 function projectAuthorization(req, res, next) {
-    console.log(req.decoded.id, '=====')
+    Project
+        .findOne({
+            users: req.decoded.id
+        })
+        .then(project => {
+            if (req.decoded.id != project.creator) {
+                res
+                    .status(401)
+                    .json({
+                        msg: `Unauthorized access`
+                    })
+            } else {
+                next()
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 module.exports = { profileAuthorization, taskAuthorization, projectAuthorization }

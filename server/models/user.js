@@ -18,32 +18,32 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: [true, 'Email field is required'],
-        // validate: [{
-        //     validator: function(v) {
-        //       return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v)
-        //     },
-        //     message: "Invalid email format"
-        //   },{
-        //     isAsync: true,
-        //     unique: true,
-        //     validator: function (value, callback) {
-        //       User
-        //         .findOne({
-        //           email: value
-        //         })
-        //         .then(member => {
-        //           if (member) {
-        //             callback(false)
-        //           } else {
-        //             callback(true)
-        //           }
-        //         })
-        //         .catch(err => {
-        //           console.log('email error: ', err)
-        //         })
-        //     },
-        //     message: "This email is already been used. Please use another email"
-        //   }],
+        validate: [{
+            validator: function(v) {
+              return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v)
+            },
+            message: "Invalid email format"
+          },{
+            isAsync: true,
+            unique: true,
+            validator: function (value, callback) {
+              User
+                .findOne({
+                  email: value
+                })
+                .then(member => {
+                  if (member) {
+                    callback(false)
+                  } else {
+                    callback(true)
+                  }
+                })
+                .catch(err => {
+                  console.log('email error: ', err)
+                })
+            },
+            message: "This email is already been used. Please use another email"
+          }],
         trim: true
     },
     password: {

@@ -18,13 +18,6 @@ const todoSchema = new Schema({
     due_date: {
         type: Date,
         required: true,
-        // validate: {
-        //     validator: function(v) {
-        //         validator.isBefore(v)
-        //         console.log(validator.isBefore(v), '+++++++++')
-        //         console.log(v, '==========')
-        //     }
-        // }
     },
     user: {
         type: Schema.Types.ObjectId,

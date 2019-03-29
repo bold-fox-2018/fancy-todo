@@ -1,4 +1,5 @@
 const server = axios.create({
+    // baseURL: `http://server-ecommerce.mahdihrs.world`
     baseURL: `http://localhost:3000`
 })
 
@@ -7,6 +8,7 @@ let userLogin = ''
 let allMyTodos = []
 let allMyProjects = []
 let projectInvitations = []
+let projectId = ''
 
 if (!localStorage.getItem('token')) {
     toHomepage()
@@ -22,11 +24,21 @@ function toHomepage() {
 function login() {
     getAllInvitationsForNotifications()
     todoMenu()
-    fetchTodos()
-    $('.usersLogin').show()
-    $('.noLogin').hide()
-    $('#toForms').empty()
+    setTimeout(function () {
+        fetchTodos()
+        $('.usersLogin').show()
+        $('.noLogin').hide()
+        $('#toForms').empty()
+    }, 3000)
 }
+
+// function signOut() {
+//     $('#myNotifications').empty()
+//     localStorage.removeItem('token')
+//     localStorage.removeItem('id')
+//     toHomepage()
+//     swal("Signing Out!", "", "success");
+// }
 
 function convertDate(date) {
     date = new Date(date)

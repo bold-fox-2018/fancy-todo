@@ -78,6 +78,7 @@ function fetchTodos() {
         }
     })
     .then(({data}) => {
+        console.log(data)
         allMyTodos = data
     })
     .catch(err => {
@@ -187,6 +188,7 @@ function todoMenu() {
     }
         
 function getTodo(id) {
+    console.log(id)
     $('#editForm').empty()
     server({
         url: `/todos/${id}`,
@@ -327,18 +329,43 @@ function getTodo(id) {
 
         $('#editTodo').submit(function(event) {
             event.preventDefault()
-            server({
-                url: `/todos/${id}`,
-                method: 'patch',
+            // $.ajax({
+            //     url : `http://localhost:3000/todos/${id}`,
+            //     data : {
+            //         name: $('#todo_input_edit').val(),
+            //         status: $("input[name='status_edit']:checked").val(),
+            //         description: $('#description_input_edit').val(),
+            //         due_date: $('#date_input_edit').val(),
+            //         urgency: $("input[name='urgency_edit']:checked").val()
+            //     },
+            //     headers: {
+            //         access_token: localStorage.getItem('token')
+            //     },
+            //     type : 'PATCH',
+            // })
+            // server({
+            //     url: `/todos/${id}`,
+            //     method: 'patch',
+            //     headers: {
+            //         access_token: localStorage.getItem('token')
+            //     },
+            //     data: {
+            //         name: $('#todo_input_edit').val(),
+            //         status: $("input[name='status_edit']:checked").val(),
+            //         description: $('#description_input_edit').val(),
+            //         due_date: $('#date_input_edit').val(),
+            //         urgency: $("input[name='urgency_edit']:checked").val()
+            //     }
+            // })
+            server.patch(`/todos/${id}`, {
+                name: $('#todo_input_edit').val(),
+                status: $("input[name='status_edit']:checked").val(),
+                description: $('#description_input_edit').val(),
+                due_date: $('#date_input_edit').val(),
+                urgency: $("input[name='urgency_edit']:checked").val()
+            }, {
                 headers: {
-                    access_token: localStorage.getItem('token')
-                },
-                data: {
-                    name: $('#todo_input_edit').val(),
-                    status: $("input[name='status_edit']:checked").val(),
-                    description: $('#description_input_edit').val(),
-                    due_date: $('#date_input_edit').val(),
-                    urgency: $("input[name='urgency_edit']:checked").val()
+                    access_token: localStorage.getItem('token') 
                 }
             })
             .then(({data}) => {
@@ -358,6 +385,8 @@ function getTodo(id) {
                 }, 2500)
             })
             .catch(err => {
+                console.log(err)
+                return
                 if (!err.response.data.err.errors.name.message) {
                     swal(`${err.response.data.err}`, "", 'error')
                 } 

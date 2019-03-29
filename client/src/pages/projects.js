@@ -76,6 +76,7 @@ function getProject(id) {
         }
     })
     .then(({data}) => {
+        projectId = data._id
         let creator = ''
         let userList = ``
         let action = `<td><strong>-</strong></td>`
@@ -490,7 +491,7 @@ function getTodoInProject(id, projectId) {
         $('#editTodoFromProject').submit(function(event) {
             event.preventDefault()
             server({
-                url: `/todos/${id}`,
+                url: `/projects/edit-todo-in-project/${projectId}/${id}`,
                 method: 'patch',
                 headers: {
                     access_token: localStorage.getItem('token')
@@ -519,6 +520,7 @@ function getTodoInProject(id, projectId) {
                 }, 2500)
             })
             .catch(err => {
+                console.log(err)
                 if (!err.response.data.err.errors.name.message) {
                     swal(`${err.response.data.err}`, "", 'error')
                 } 

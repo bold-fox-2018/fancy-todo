@@ -27,13 +27,22 @@ function onSignIn(googleUser) {
 }
 
 function signOut() {
-    const auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut()
-    .then(function () {
+    // allMyTodos
+    if (gapi) {
+        const auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut()
+        .then(function () {
+            $('#myNotifications').empty()
+            localStorage.removeItem('token')
+            localStorage.removeItem('id')
+            toHomepage()
+            swal("Signing Out!", "", "success");
+        });
+    } else {
         $('#myNotifications').empty()
         localStorage.removeItem('token')
         localStorage.removeItem('id')
         toHomepage()
         swal("Signing Out!", "", "success");
-    });
+    }
 }

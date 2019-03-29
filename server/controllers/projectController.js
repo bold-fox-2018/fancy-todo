@@ -384,6 +384,37 @@ class Controller {
                     })
             })
     }
+
+    static editTodo(req, res) {
+        let edit = {
+            name: req.body.name,
+            status: req.body.status,
+            description: req.body.description,
+            due_date: req.body.due_date,
+            urgency: req.body.urgency
+        }
+        
+        Todo
+            .updateOne({
+                _id: req.params.todoId
+            }, edit)
+            .then(updated => {
+                res
+                    .status(200)
+                    .json({
+                        msg: `Todo has been successfully updated`
+                    })
+            })
+            .catch(err => {
+                console.log(err)
+                res
+                    .status(500)
+                    .json({
+                        msg: `Internal server error`,
+                        err
+                    })
+            })
+    }
 }
 
 module.exports = Controller

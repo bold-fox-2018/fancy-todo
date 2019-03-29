@@ -1,24 +1,22 @@
 const router = require('express').Router()
 const controller = require('../controllers/projectController')
-// const { projectAuthorization } = require('../middlewares/authorization')
+const { projectAuthorization } = require('../middlewares/authorization')
+const isLogin = require('../middlewares/authentication')
 
 //projects
-router.post('/', controller.create)
-router.get('/', controller.allProjects)
-router.get('/look-invitation', controller.gotInvitationQuestionMark)
-router.post('/add-todo/:id', controller.addTodo)
-router.get('/get-project-todo/:todoId', controller.findTodo)
-router.delete('/delete-todo-from-project/:id', controller.delete)
-router.patch('/invite-member/:id', controller.inviteMember)
-router.delete('/remove-member/:memberId/:projectId', controller.removeMember)
-router.patch('/add-user/:id', controller.addUser)
-router.patch('/user-accepting-invitation/:id', controller.userAcceptingInvitation)
-router.patch('/user-rejecting-invitation/:id', controller.userRejectingInvitation)
-router.delete('/:id/:todoId', controller.removeTodo)
-router.get('/:id', controller.getProject)
+router.post('/', isLogin, controller.create)
+router.get('/', isLogin, controller.allProjects)
+router.get('/look-invitation', isLogin, controller.gotInvitationQuestionMark)
+router.post('/add-todo/:id', isLogin,  controller.addTodo)
+router.get('/get-project-todo/:todoId', isLogin, controller.findTodo)
+router.delete('/delete-todo-from-project/:id', isLogin, controller.delete)
+router.patch('/edit-todo-in-project/:projectId/:todoId', isLogin, controller.editTodo)
+router.patch('/invite-member/:id', isLogin, controller.inviteMember)
+router.delete('/remove-member/:memberId/:projectId', isLogin, controller.removeMember)
+router.patch('/add-user/:id', isLogin, controller.addUser)
+router.patch('/user-accepting-invitation/:id', isLogin, controller.userAcceptingInvitation)
+router.patch('/user-rejecting-invitation/:id', isLogin, controller.userRejectingInvitation)
+router.delete('/:id/:todoId', isLogin, controller.removeTodo)
+router.get('/:id', isLogin, controller.getProject)
 
 module.exports = router
-
-// Authenticated user bisa membuat project, dan invite/add member ke project tersebut.
-// User dapat membuat todo di project yang sudah dipilih
-// Todo yang ada di suatu project hanya bisa di read/write (CRUD) oleh project members.

@@ -137,7 +137,7 @@ class Controller {
                         }
                     }
                     updateFiltered.updatedAt = new Date
-                    console.log(updateFiltered)
+                    console.log(updateFiltered, '====')
                     return Todo
                         .findOneAndUpdate({
                             _id: req.params.id,

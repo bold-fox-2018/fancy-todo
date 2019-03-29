@@ -107,12 +107,12 @@ function loginButtonPressedFromSidebar() {
             userLogin = data.id
         })
         .catch(err => {
-            console.log(err)
-            // if (err.response.data.msg) {
-            //     swal(`${err.response.data.msg}`, "", "error")
-            // } else {
-            //     swal(`Internal Server Error`, "", "error")
-            // }
+            // console.log(err)
+            if (err.response.data.msg) {
+                swal(`${err.response.data.msg}`, "", "error")
+            } else {
+                swal(`Internal Server Error`, "", "error")
+            }
         })
     })
 }
