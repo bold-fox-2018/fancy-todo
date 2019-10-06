@@ -1,1 +1,32 @@
 # fancy-todo
+
+### Route
+Route | HTTP | Header(s) | Body | Response | Description
+------|------|-----------|------|----------|------------
+/user/sigin| POST | if loginVia google: <br> token_id:String(**Required**) <br> (token id from google) | loginVia:String(**Required**) <br> (value 'google' or 'website'), <br> if loginVia website: <br> email:String(**Required**), <br> password:String(**Required**) | Error: <br> Wrong username/password (fail signin via website) <br> Success: <br> Get a signin token, <br> automatic signup if the user haven't signup (if signin via google) | Signin into server
+/user/signup | POST | none | name:String(**Required**), <br> email:String(**Required**), <br> password:String(**Required**), loginVia:String(**Default Value 'website'**) | Error: <br> Wrong email/format email <br> (if user type the wrong email format or the email has been taken by other users), <br> Success: <br> Register user into the web | Register user via website
+/todo | GET | token:String(**Required**) <br> (token got from signin as a JWT token), <br> | none | Error: <br> In authentication, only the current user who can access this feature <br> Success: <br> Authenticated user can view their to do lists | Get User To Do Lists (**Authenticated User Only**)
+/todo | POST | token:String(**Required**) <br> (token got from signin as a JWT token), <br> | name:String(**Required**) <br> description:String(**Required**) <br> status:String(**Required**) <br> dueDate:String(**Required**) | Error: <br> Only authenticated user that can create this to do <br> Validation didn't input all requirements <br> Success: <br> To do created | Create a to do (**Authenticated User Only**)
+/todo/:id | PATCH | token:String(**Required**) <br> (token got from signin as a JWT token), <br> | name:String(**Required**) <br> description:String(**Required**) <br> status:String(**Required**) <br> dueDate:String(**Required**) | Error: <br> Only authenticated user that can update this to do <br> Validation didn't input all requirements <br> Success: <br> To do updated | Update a to do (**Authenticated User Only**)
+/todo/:id | DELETE | token:String(**Required**) <br> (token got from signin as a JWT token), <br> | none | Error: <br> Only authenticated user that can delete this to do <br> Success: <br> To do deleted | Delete a to do (**Authenticated User Only**)
+/todo/project/:projectId | GET | token:String(**Required**) <br> (token got from signin as a JWT token), <br> | none | Error: <br> In authentication, only the current user who can access this feature <br> Success: <br> Authenticated user can view project to do lists | Get User To Do Lists (**Authenticated User Only**)
+/todo/project/:projectId | POST | token:String(**Required**) <br> (token got from signin as a JWT token), <br> projectID:String(**Required**) | name:String(**Required**) <br> description:String(**Required**) <br> status:String(**Required**) <br> dueDate:String(**Required**) | Error: <br> Only authenticated user that can create this to do <br> Validation didn't input all requirements <br> Success: <br> To do created | Create a project to do (**Authenticated User Only**)
+/todo/project/:projectId/:id | PATCH | token:String(**Required**) <br> (token got from signin as a JWT token), <br> projectID:String(**Required**), <br> id:String(**Required**) | name:String(**Required**) <br> description:String(**Required**) <br> status:String(**Required**) <br> dueDate:String(**Required**) | Error: <br> Only authenticated user that can update this to do <br> Validation didn't input all requirements <br> Success: <br> Project to do updated | Update a project to do (**Authenticated User Only**)
+/todo/project/:projectId/:id | DELETE | token:String(**Required**) <br> (token got from signin as a JWT token), <br> projectID:String(**Required**) <br> id:String(**Required**) | none | Error: <br> Only authenticated user that can delete this to do <br> Success: <br> To do deleted | Delete a to do (**Authenticated User Only**)
+/project | GET | token:String(**Required**) <br> (token got from signin as a JWT token), <br> | none | Error: <br> In authentication, only the current user who can access this feature <br> Success: <br> Authenticated user can view their project | Get User Project Lists (**Authenticated User Only**)
+/project/invitation | GET | token:String(**Required**) <br> (token got from signin as a JWT token), <br> | none | Error: <br> In authentication, only the current user who can access this feature <br> Success: <br> Authenticated user can view if their invited into project | Get Invitation to Project (**Authenticated User Only**)
+/project/ | POST | token:String(**Required**) <br> (token got from signin as a JWT token), <br> | name:String(**Required**) | Error: <br> Only authenticated user that can create this project <br> Validation didn't input all requirements <br> Success: <br> Project created | Create a project (**Authenticated User Only**)
+project/invite/:projectId | PATCH | token:String(**Required**) <br> (token got from signin as a JWT token), <br> projectID:String(**Required**) | email:String(**Required**) | Error: <br> Only authenticated user that can invite another user <br> Validation didn't input all requirements <br> Success: <br> Invite User | Invite User To Project (**Authenticated User Only**)
+project/accept/:projectId | PATCH | token:String(**Required**) <br> (token got from signin as a JWT token), <br> projectID:String(**Required**) | none | Error: <br> Only invited user who can accept invitation <br> Didn't get invited <br> Success: <br> Accept Invitation | Accept Invitation (**Authenticated User Only**)
+project/decline/:projectId | PATCH | token:String(**Required**) <br> (token got from signin as a JWT token), <br> projectID:String(**Required**) | none | Error: <br> Only invited user who can decline invitation <br> Didn't get invited <br> Success: <br> Decline invitation | Decline Invitation (**Authenticated User Only**)
+project/:projectId | DELETE | token:String(**Required**) <br> (token got from signin as a JWT token), <br> projectID:String(**Required**) | none | Error: <br> Only authenticated user that can delete this to do <br> Success: <br> Delete Project | Delete Project (**Authenticated User & Server Only**)
+
+
+### Usage
+command |
+------- |
+$ live-server --host=localhost |
+
+Server can be accessed via http://35.198.213.51:80/
+<br>
+Access the Client via http://localhost:8080/
