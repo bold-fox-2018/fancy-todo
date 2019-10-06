@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Srisakdi" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <meta name="google-signin-client_id" content="1044222864150-at0dr4v3fkk01ojj2aj2h67oglokgv3p.apps.googleusercontent.com"> -->
+    <meta name="google-signin-client_id" content="837858498136-56bu307ad8562moodms76hi8r8pteph8.apps.googleusercontent.com">
+    <link rel="stylesheet" href="./src/style.css">
+    <title>Fancy Todo</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#" id="logoTheNextGeneration" onclick="todoMenu()">Fancy Todo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active noLogin">
+                    <a class="nav-link" href="#" onclick="loginButtonPressedFromNavbar()">Login</a>
+                </li>
+                <li>
+                    <div class="g-signin2 noLogin" data-onsuccess="onSignIn"></div>
+                </li>
+            </ul>
+            <div style="width: 100px;" class="d-flex usersLogin" href="#" onclick="fetchNotifications()">
+                <div>
+                    <button id="" class="btn usersLogin mr-0 pr-0"><img src="https://img.icons8.com/plasticine/30/000000/appointment-reminders.png"></button>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-1" style="color: #fff;" id="myNotifications"></a>
+                </div>
+            </div>
+            <button class="btn usersLogin buttonNav" onclick="signOut()">Logout</button>
+        </div>
+    </nav>
+    
+    <div id="generalHomepage">
+        <div id="homepageHeader" class="noLogin">
+            <img src="https://images.pexels.com/photos/533189/pexels-photo-533189.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        </div>
+        <div id="toForms"></div>
+    </div>
+
+    <div id="loginHomepage" class="usersLogin">
+        <div class="d-flex">
+            <div id="sideBarTodo" class="col-2 vh-100"></div>
+            <div id="todoContents" class="col-10 vh-100 my-5 mx-3"></div>
+        </div>
+    </div>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./src/google-authentication.js"></script>
+    <script src="./src/pages/forms.js"></script>
+    <script src="./src/components/sidebar.js"></script>
+    <script src="./src/pages/todos.js"></script>
+    <script src="./src/pages/projects.js"></script>
+    <script src="./src/notifications.js"></script>
+    <script src="./src/main.js"></script>
+</body>
+</html>

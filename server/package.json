@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "google-auth-library": "^3.1.0",
+    "jsonwebtoken": "^8.5.0",
+    "local-storage": "^1.4.2",
+    "mongoose": "^5.4.17",
+    "mongoose-unique-validator": "^2.0.2",
+    "morgan": "~1.9.0",
+    "sweetalert": "^2.1.2",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "dotenv": "^6.2.0"
+  }
+}
