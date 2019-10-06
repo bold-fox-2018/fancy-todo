@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="351773557771-oca184lbekrl7tg8cir43n6upn0t06s9.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div id="navbar"></div>
+    <p id="hello"> Welcome to Our Platform</p>
+
+    <form id="register_form" onsubmit="register()">
+        <div class="container">
+          <center>
+            <h1>Register to Access Our Fancy ToDo List</h1>
+            <hr>
+            <label for="email"><b>Email:</b></label> <br>
+            <input type="text" placeholder="Enter Email" name="email" id="reg_email" required>
+            <br><br>
+        
+            <label for="psw"><b>Password:</b></label> <br>
+            <input type="password" placeholder="Enter Password" name="psw" id="pwd" required>
+            <br><br>
+        
+            <label for="psw-repeat"><b>Repeat Password:</b></label> <br>
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" id="pwd" required>
+            <hr>
+        
+            <input type="submit" value="Submit" id="submit_button"></input>
+        </center>
+        </div>
+        
+        <div class="container signin">
+          <br>
+          <center>
+          <p>Already have an account? <a href='#' id="sign_in">Sign in</a>.</p> </center>
+        </div>
+        
+      </form>
+    
+    <form id="login" onsubmit="login()">
+        <center>
+        <h1>Please login to access your todo list:</h1><br> 
+        <b>Email:</b><br>
+        <input type="text" name="email" id="email">
+        <br>
+        <b>Password:</b><br>
+        <input type="password" name="pwd" id="pw">
+        <br><br>
+        <input type="submit" value="Submit" id="submit_button">
+        <br><br>
+        <div class="g-signin2" data-onsuccess="onSignIn" id="google_signin"></div>
+      </center>
+
+      <div class="container signin">
+        <br>
+        <center>
+        <p>Do not have an account? <a href='#' id="register_">Register</a>.</p> </center>
+      </div>
+    </form>
+
+    <div id="body-after-signin">
+      <br>
+      
+      <div class="container" id="container-list">
+        <div class="row" id="todoRow"></div>
+        <div class="row" id="todoDetail"></div>    
+        <div class="row" id="todoEdit"></div> 
+        <div class="row" id="todoDelete"></div> 
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <script src="./js/index.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/content.js"></script>
+    <script src="./js/regLogin.js"></script>  
+
+</body>
+</html>
