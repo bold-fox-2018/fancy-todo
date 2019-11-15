@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Beer Castle</title>
+  <meta name="google-signin-client_id" content="1076129057884-slnvg94j4qsijo2aisv3s24hdfi7scis.apps.googleusercontent.com">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div id="navbar"></div>
+
+  <div id="body-before-signin">
+    <div class="container" id="beer-of-the-day">
+      <div class="row">
+        <div class="col-md-4 offset-md-5">
+          <button onclick="getBeerOfTheDay()">Beer of the Day</button>
+        </div>
+        <div class="col-md-1 offset-md-2">
+
+        </div>
+
+      </div>
+    </div>
+    <br>
+    <div class="container" id="container-list">
+      <div class="row" id="beerRow">
+
+      </div>
+    </div>
+    <br>
+    <div class="container" id="container-detail">
+      <div class="row" id="beerDay">
+      </div>
+    </div>
+    <br>
+    <div class="container" id="container-multimedia">
+      <div class="row">
+        <div class="col-md-6">
+          <div id="content"></div>
+          <div id="player"></div>
+        </div>
+        <div class="col-md-6">
+          <h4> Location to Drink Beer: </h4>
+          <p><button class="w3-btn w3-blue" onclick="getLocation()">Find Bar Around Me</button></p>
+          <div id="mapholder"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="content"></div>
+
+  <form id="login" onsubmit="login()">
+    Email:<br>
+    <input type="text" name="email" id="email">
+    <br>
+    Password:<br>
+    <input type="password" name="pwd" id="pw">
+    <br><br>
+    <input type="submit" value="Submit" id="submit_button">
+    <br><br>
+    <center>
+      <div class="g-signin2" data-onsuccess="onSignIn" id="google_signin"></div>
+    </center>
+  </form>
+
+  <form id="register_form" onsubmit="register()">
+    <div class="container">
+      <h1>Register</h1>
+      <hr>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" id="reg_email" required>
+      <br>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="" id="pwd" required>
+      <br>
+
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" id="pwd" required>
+      <hr>
+      <input type="submit" value="Submit" id="submit_button"></input>
+    </div>
+
+    <div class="container signin">
+      <br>
+      <p>Already have an account? <a id="sign_in">Sign in</a>.</p>
+    </div>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="./js/index.js"></script>
+  <script src="./js/navbar.js"></script>
+  <script src="./js/content.js"></script>
+  <script src="./js/youtube.js"></script>
+  <script src="./js/loginReg.js"></script>
+  <script src="./js/map.js"></script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKJawQDu7m0WWAI2tjmH8lS6Mcq-tCcGo&callback=initMap&libraries=places"
+    async defer></script>
+
+</body>
+
+</html>

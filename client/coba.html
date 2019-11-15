@@ -1,0 +1,121 @@
+function add() {
+$.ajax({
+url: 'http://localhost:3000/api/user/add',
+method: 'POST',
+data: {
+token: localStorage.getItem('token'),
+name: $('#todoName').val(),
+description: $('#todoDescription').val(),
+due_date: $('#todoDue_date').val(),
+status: $('#todoStatus').val()
+},
+headers: {
+token: localStorage.token
+}
+})
+
+.done(function (data) {
+console.log(data);
+
+})
+.fail(function (err) {
+console.log(err);
+
+})
+
+
+}
+
+
+function save() {
+
+
+
+}
+
+function todo() {
+// console.log('ok
+$.ajax({
+url: 'http://localhost:3000/api/todo/one',
+method: 'GET',
+data: {
+token: localStorage.getItem('token')
+},
+headers: {
+token: localStorage.token
+}
+
+})
+.done(function (data) {
+console.log(data);
+let list = `<tr>
+    <td>
+        id
+    </td>
+    <td>￼edit
+
+        nama
+    </td>
+    <td>
+        description
+    </td>
+    <td>
+        due_date
+    </td>
+    <td>
+        status
+    </td>
+</tr>`
+let con = 0
+
+for (var i = 0; i < data.todo.length; i++) { // console.log(data.todo[i]); list +=` <div id="list">
+    <form id=`${data.todo[i]._id}`>
+
+        <tr>
+            <td>${data.todo[i]._id}</td>
+            <td><input type="text" value="${data.todo[i].name}"></input></td>
+            <td><input type="text" value="${data.todo[i].description}"></input></td>
+            <td><input type="text" value="${(data.todo[i].due_date) }"></input></td>
+            <td><input type="text" value="${data.todo[i].status}"></input></td>
+            <td><button type="submit">Edit</button>
+
+        </tr>
+    </form>
+    </div>
+    `
+    }
+
+    $('#allTodo').html(list)
+    // $('#allTodo').submit(function (event) {
+    // event.preventDefault()
+    // $.ajax({
+    // url: 'http://localhost:3000/api/user/:id',
+    // method: 'PUT',
+    // data: {
+    // token: localStorage.getItem('token'),
+    // name: $('#todoName').val(),
+    // description: $('#todoDescription').val(),
+    // due_date: $('#todoDue_date').val(),
+    // status: $('#todoStatus').val()
+    // },
+    // headers: {
+    // token: localStorage.token
+    // }
+    // })
+
+    // .done(function (data) {
+    // console.log(data);
+
+    // })
+    // .fail(function (err) {
+    // console.log(err);
+
+    // })
+    // })
+    })
+    .fail(function (err) {
+    console.log(err);
+
+    })
+
+    }
